@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Department">
+    <id column="department_Num" jdbcType="INTEGER" property="departmentNum" />
+    <result column="department_Name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="dep_Describe" jdbcType="VARCHAR" property="depDescribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    department_Num, department_Name, address, dep_Describe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where department_Num = #{departmentNum,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where department_Num = #{departmentNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Department">
+    insert into department (department_Num, department_Name, address, 
+      dep_Describe)
+    values (#{departmentNum,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{depDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="departmentNum != null and departmentNum !=''">
+        department_Num,
+      </if>
+      <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+        department_Name,
+      </if>
+      <if test="address != null and !&quot;&quot;.equals(address.trim())">
+        address,
+      </if>
+      <if test="depDescribe != null and !&quot;&quot;.equals(depDescribe.trim())">
+        dep_Describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="departmentNum != null and departmentNum !=''">
+        #{departmentNum,jdbcType=INTEGER},
+      </if>
+      <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null and !&quot;&quot;.equals(address.trim())">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="depDescribe != null and !&quot;&quot;.equals(depDescribe.trim())">
+        #{depDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Department">
+    update department
+    <set>
+      <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+        department_Name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null and !&quot;&quot;.equals(address.trim())">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="depDescribe != null and !&quot;&quot;.equals(depDescribe.trim())">
+        dep_Describe = #{depDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where department_Num = #{departmentNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Department">
+    update department
+    set department_Name = #{departmentName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      dep_Describe = #{depDescribe,jdbcType=VARCHAR}
+    where department_Num = #{departmentNum,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.OperationRecordMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.OperationRecord">
+    <id column="operation_id" jdbcType="INTEGER" property="operationId" />
+    <result column="operation_user" jdbcType="INTEGER" property="operationUser" />
+    <result column="operation_context" jdbcType="VARCHAR" property="operationContext" />
+    <result column="operation_name" jdbcType="VARCHAR" property="operationName" />
+    <result column="operation_time" jdbcType="TIMESTAMP" property="operationTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    operation_id, operation_user, operation_context, operation_name, operation_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+  </select>
+  <select id="findByName"  parameterType="String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+    where operation_name like concat('%',#{operationName},'%')
+  </select>
+  <select id="findByUser"  parameterType="com.uestc.managesystem.entity.model.User" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+   	<where>
+   	  <if test="userNumber != null and userNumber != ''">
+        operation_user = #{userNumber,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        AND operation_name like concat('%',#{userName},'%')
+      </if>
+   	</where>
+  </select>
+  <select id="findById"  parameterType="Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_record
+    where operation_user = #{operationUser,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from operation_record
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.OperationRecord">
+    insert into operation_record (operation_id, operation_user, operation_context, 
+      operation_name, operation_time)
+    values (#{operationId,jdbcType=INTEGER}, #{operationUser,jdbcType=INTEGER}, #{operationContext,jdbcType=VARCHAR}, 
+      #{operationName,jdbcType=VARCHAR}, #{operationTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.OperationRecord">
+    insert into operation_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        operation_id,
+      </if>
+      <if test="operationUser != null">
+        operation_user,
+      </if>
+      <if test="operationContext != null">
+        operation_context,
+      </if>
+      <if test="operationName != null">
+        operation_name,
+      </if>
+      <if test="operationTime != null">
+        operation_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operationId != null">
+        #{operationId,jdbcType=INTEGER},
+      </if>
+      <if test="operationUser != null">
+        #{operationUser,jdbcType=INTEGER},
+      </if>
+      <if test="operationContext != null">
+        #{operationContext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null">
+        #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.OperationRecord">
+    update operation_record
+    <set>
+      <if test="operationUser != null">
+        operation_user = #{operationUser,jdbcType=INTEGER},
+      </if>
+      <if test="operationContext != null">
+        operation_context = #{operationContext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationName != null">
+        operation_name = #{operationName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.OperationRecord">
+    update operation_record
+    set operation_user = #{operationUser,jdbcType=INTEGER},
+      operation_context = #{operationContext,jdbcType=VARCHAR},
+      operation_name = #{operationName,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP}
+    where operation_id = #{operationId,jdbcType=INTEGER}
+  </update>
+</mapper>

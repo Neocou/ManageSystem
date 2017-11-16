@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.User">
+    <id column="user_Number" jdbcType="INTEGER" property="userNumber" />
+    <result column="department_Num" jdbcType="INTEGER" property="departmentNum" />
+    <result column="post_Num" jdbcType="INTEGER" property="postNum" />
+    <result column="department_Name" jdbcType="VARCHAR" property="departmentName" />
+    <result column="post_Name" jdbcType="VARCHAR" property="postName" />
+    <result column="pass_Word" jdbcType="VARCHAR" property="passWord" />
+    <result column="user_Name" jdbcType="VARCHAR" property="userName" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="phone_Num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <collection property="right" resultMap="com.uestc.managesystem.mapper.PowerMapper.BaseResultMap"/>
+    <collection property="roles" resultMap="com.uestc.managesystem.mapper.RoleMapper.BaseResultMap"/>
+    <collection property="grids" resultMap="com.uestc.managesystem.mapper.GridMapper.BaseResultMap"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_Number, department_Num, post_Num, pass_Word, user_Name, gender, age, phone_Num,user_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_Number = #{userNumber,jdbcType=INTEGER}
+  </select>
+  <select id="selectByDepartmentId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where department_Num = #{departmentNum,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPostId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </select>
+  <select id="userSelect" parameterType="com.uestc.managesystem.entity.dto.UserSelect" resultMap="BaseResultMap">
+    select 
+    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
+		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
+		on user.user_Number = user_grid.user_Number
+		left join(user_role 
+									left join role 
+													on user_role.role_ID = role.role_ID
+									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
+													on	user_role.role_ID = 	role_power.role_ID	)
+		on user.user_Number = user_role.user_Number
+	<where>
+      <if test="userNumber != null and userNumber != ''">
+        user.user_Number = #{userNumber,jdbcType=INTEGER}
+      </if>
+      <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+        AND department_Name like concat('%',#{departmentName},'%')
+      </if>
+      <if test="postName != null and !&quot;&quot;.equals(postName.trim())">
+        AND post_Name  like concat('%',#{postName},'%')
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        AND user_Name like concat('%',#{userName},'%')
+      </if>
+	</where>
+  </select>
+  <select id="findAllUser"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  
+  <select id="findAllByStatus"  resultMap="BaseResultMap">
+    select 
+   	user_Number,user_Name,user_status
+    from user
+  </select>
+  <select id="findByStatus"  parameterType = "String" resultMap="BaseResultMap">
+    select 
+    user_Number,user_Name,user_status
+    from user where user_status = #{user_status}
+  </select>
+  <select id="findAllUserResult"  resultMap="BaseResultMap">
+    select 
+    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
+		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
+		on user.user_Number = user_grid.user_Number
+		left join(user_role 
+									left join role 
+													on user_role.role_ID = role.role_ID
+									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
+													on	user_role.role_ID = 	role_power.role_ID	)
+		on user.user_Number = user_role.user_Number
+  </select>
+ <select id="selectByUser" parameterType="com.uestc.managesystem.entity.model.User" resultMap="BaseResultMap">
+    select 
+    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
+		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
+		on user.user_Number = user_grid.user_Number
+		left join(user_role 
+									left join role 
+													on user_role.role_ID = role.role_ID
+									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
+													on	user_role.role_ID = 	role_power.role_ID	)
+		on user.user_Number = user_role.user_Number
+    where user.user_Number = #{userNumber,jdbcType=INTEGER} and pass_Word = #{passWord,jdbcType=VARCHAR}
+  </select>
+ <select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
+    select 
+    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
+		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
+		on user.user_Number = user_grid.user_Number
+		left join(user_role 
+									left join role 
+													on user_role.role_ID = role.role_ID
+									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
+													on	user_role.role_ID = 	role_power.role_ID	)
+		on user.user_Number = user_role.user_Number
+    where user.user_Number = #{userNumber,jdbcType=INTEGER} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_Number = #{userNumber,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.User">
+    insert into user (user_Number, department_Num, post_Num, 
+      pass_Word, user_Name, gender, 
+      age, phone_Num)
+    values (#{userNumber,jdbcType=INTEGER}, #{departmentNum,jdbcType=INTEGER}, #{postNum,jdbcType=INTEGER}, 
+      #{passWord,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{age,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.User" keyProperty="userNumber" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+      <if test="departmentNum != null">
+        department_Num,
+      </if>
+      <if test="postNum != null">
+        post_Num,
+      </if>
+      <if test="passWord != null">
+        pass_Word,
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        user_Name,
+      </if>
+      <if test="gender != null and !&quot;&quot;.equals(gender.trim())">
+        gender,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phoneNum != null">
+        phone_Num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=INTEGER},
+      </if>
+      <if test="departmentNum != null">
+        #{departmentNum,jdbcType=INTEGER},
+      </if>
+      <if test="postNum != null">
+        #{postNum,jdbcType=INTEGER},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+       <if test="gender != null and !&quot;&quot;.equals(gender.trim())">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.User">
+    update user
+    <set>
+      <if test="departmentNum != null">
+        department_Num = #{departmentNum,jdbcType=INTEGER},
+      </if>
+      <if test="postNum != null">
+        post_Num = #{postNum,jdbcType=INTEGER},
+      </if>
+      <if test="passWord != null">
+        pass_Word = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        user_Name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null and !&quot;&quot;.equals(gender.trim())">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null">
+        phone_Num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_Number = #{userNumber,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.User">
+    update user
+    set department_Num = #{departmentNum,jdbcType=INTEGER},
+      post_Num = #{postNum,jdbcType=INTEGER},
+      pass_Word = #{passWord,jdbcType=VARCHAR},
+      user_Name = #{userName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      age = #{age,jdbcType=INTEGER},
+      phone_Num = #{phoneNum,jdbcType=VARCHAR}
+    where user_Number = #{userNumber,jdbcType=INTEGER}
+  </update>
+  <update id="setOnline" parameterType="com.uestc.managesystem.entity.model.User">
+    update user
+	set user_status = '在线'
+	where user_Number = #{userNumber,jdbcType=INTEGER} 
+  </update>
+  <update id="setOffline" parameterType="com.uestc.managesystem.entity.model.User">
+    update user
+	set user_status = '离线'
+	where user_Number = #{userNumber,jdbcType=INTEGER}
+  </update>
+</mapper>

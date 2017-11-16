@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.GridMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Grid">
+    <id column="grid_ID" jdbcType="INTEGER" property="gridId" />
+    <result column="community_ID" jdbcType="INTEGER" property="communityId" />
+    <result column="grid_Information" jdbcType="LONGVARCHAR" property="gridInformation" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    grid_ID, community_ID,grid_Information
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from grid
+    where grid_ID = #{gridId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from grid
+    where grid_ID = #{gridId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Grid">
+    insert into grid (grid_ID, community_ID, grid_Information
+      )
+    values (#{gridId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, #{gridInformation,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Grid">
+    insert into grid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gridId != null">
+        grid_ID,
+      </if>
+      <if test="communityId != null">
+        community_ID,
+      </if>
+      <if test="gridInformation != null">
+        grid_Information,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gridId != null">
+        #{gridId,jdbcType=INTEGER},
+      </if>
+      <if test="communityId != null">
+        #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="gridInformation != null">
+        #{gridInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Grid">
+    update grid
+    <set>
+      <if test="communityId != null">
+        community_ID = #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="gridInformation != null">
+        grid_Information = #{gridInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where grid_ID = #{gridId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.Grid">
+    update grid
+    set community_ID = #{communityId,jdbcType=INTEGER},
+      grid_Information = #{gridInformation,jdbcType=LONGVARCHAR}
+    where grid_ID = #{gridId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Grid">
+    update grid
+    set community_ID = #{communityId,jdbcType=INTEGER}
+    where grid_ID = #{gridId,jdbcType=INTEGER}
+  </update>
+</mapper>

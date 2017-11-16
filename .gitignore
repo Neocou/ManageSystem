@@ -1,0 +1,7 @@
+.git
+.settings
+target
+.project
+.classpath
+*.class
+*.jar

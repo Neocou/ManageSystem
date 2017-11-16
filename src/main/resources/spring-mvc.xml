@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+       		http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-4.3.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+            
+            
+	 <mvc:annotation-driven />
+     <!-- 静态资源处理 -->
+     <mvc:default-servlet-handler />
+     
+     
+
+      <!-- 拦截器 数据库拦截器未写入 -->
+      <mvc:interceptors>
+
+     
+		<mvc:interceptor>
+     		<mvc:mapping path="/**"/>
+     		<mvc:exclude-mapping path="/login"/>
+     		<bean class="com.uestc.managesystem.Interceptor.LoginInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/dep/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.DepartmentInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/cases/settime"/>
+     		<bean class="com.uestc.managesystem.Interceptor.CasesInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/event*/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.EventInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/notice/**"/>
+     		<mvc:exclude-mapping path="/notice/view/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.NoticeInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/operation/admin"/>
+     		<bean class="com.uestc.managesystem.Interceptor.OperationInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/part/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.PartInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/post/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.PostInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/role/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.RoleInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/question/**"/>
+     		<mvc:exclude-mapping path="/question/view*/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.QuestionInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/restTime/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.RestTimeInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/user/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.UserInterceptor"/>
+     	</mvc:interceptor>
+     	<mvc:interceptor>
+     		<mvc:mapping path="/grid/**"/>
+     		<bean class="com.uestc.managesystem.Interceptor.GridInterceptor"/>
+     	</mvc:interceptor>
+
+
+     </mvc:interceptors> 
+	 <!-- 视图 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<!-- 
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	     -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    <!-- 上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<property name="resolveLazily" value="true" />
+    	<property name="maxUploadSize" value="20971520" />
+    	<property name="defaultEncoding" value="utf-8" />
+    </bean>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 指定所有没有指定的异常,都跳转到该页面 -->
+        <property name="defaultErrorView" value="msgError" />
+        <!-- 跳转时携带异常对象 -->
+        <property name="exceptionAttribute" value="ex"></property>
+    </bean> 
+    
+    <context:component-scan base-package="com.uestc.managesystem.controller" />
+    
+</beans>

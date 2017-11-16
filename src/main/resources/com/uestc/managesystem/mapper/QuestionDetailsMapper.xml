@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.QuestionDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.QuestionDetails">
+    <id column="ques_L_ID" jdbcType="INTEGER" property="quesLId" />
+    <result column="ques_B_ID" jdbcType="INTEGER" property="quesBId" />
+    <result column="ques_L_Name" jdbcType="VARCHAR" property="quesLName" />
+    <result column="answer" jdbcType="LONGVARCHAR" property="answer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ques_L_ID, ques_B_ID, ques_L_Name,answer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_details
+    where ques_L_ID = #{quesLId,jdbcType=INTEGER}
+  </select>
+  <select id="findAllDetail"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_details
+  </select>
+  <select id="questionSelect" parameterType="com.uestc.managesystem.entity.dto.QuestionSelect" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_details
+	<where>
+      <if test="quesLId != null and quesLId != ''">
+        ques_L_Id = #{quesLId,jdbcType=INTEGER}
+      </if>
+      <if test="quesLName != null and !&quot;&quot;.equals(quesLName.trim())">
+        AND ques_L_Name like concat('%',#{quesLName},'%')
+      </if>
+      <if test="answer != null and !&quot;&quot;.equals(answer.trim())">
+        AND answer  like concat('%',#{answer},'%')
+      </if>
+	</where>
+  </select>
+  <select id="select" parameterType="Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_details
+    where ques_B_ID = #{quesBId}
+  </select>
+  <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_details
+    where ques_L_Name like concat('%',#{quesLName},'%') or answer like concat('%',#{answer},'%')
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question_details
+    where ques_L_ID = #{quesLId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.QuestionDetails">
+    insert into question_details (ques_L_ID, ques_B_ID, ques_L_Name, 
+      answer)
+    values (#{quesLId,jdbcType=INTEGER}, #{quesBId,jdbcType=INTEGER}, #{quesLName,jdbcType=VARCHAR}, 
+      #{answer,jdbcType=LONGVARCHAR})
+  </insert>
+ <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.QuestionDetails">
+    insert into question_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quesLId != null">
+        ques_L_ID,
+      </if>
+      <if test="quesBId != null">
+        ques_B_ID,
+      </if>
+      <if test="quesLName != null and !&quot;&quot;.equals(quesLName.trim())">
+        ques_L_Name,
+      </if>
+      <if test="answer != null and !&quot;&quot;.equals(answer.trim())">
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quesLId != null">
+        #{quesLId,jdbcType=INTEGER},
+      </if>
+      <if test="quesBId != null">
+        #{quesBId,jdbcType=INTEGER},
+      </if>
+      <if test="quesLName != null and !&quot;&quot;.equals(quesLName.trim())">
+        #{quesLName,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null and !&quot;&quot;.equals(answer.trim())">
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.QuestionDetails">
+    update question_details
+    <set>
+      <if test="quesBId != null">
+        ques_B_ID = #{quesBId,jdbcType=INTEGER},
+      </if>
+      <if test="quesLName != null and !&quot;&quot;.equals(quesLName.trim())">
+        ques_L_Name = #{quesLName,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null and !&quot;&quot;.equals(answer.trim())">
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ques_L_ID = #{quesLId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.QuestionDetails">
+    update question_details
+    set ques_B_ID = #{quesBId,jdbcType=INTEGER},
+      ques_L_Name = #{quesLName,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=LONGVARCHAR}
+    where ques_L_ID = #{quesLId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.QuestionDetails">
+    update question_details
+    set ques_B_ID = #{quesBId,jdbcType=INTEGER},
+      ques_L_Name = #{quesLName,jdbcType=VARCHAR}
+    where ques_L_ID = #{quesLId,jdbcType=INTEGER}
+  </update>
+</mapper>

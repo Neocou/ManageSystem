@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.EventSecondMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.EventSecond">
+    <id column="event_L_ID" jdbcType="INTEGER" property="eventLId" />
+    <result column="Event_B_ID" jdbcType="INTEGER" property="eventBId" />
+    <result column="event_L_Name" jdbcType="VARCHAR" property="eventLName" />
+    <result column="e_Managemet_Unit" jdbcType="VARCHAR" property="eManagemetUnit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    event_L_ID, Event_B_ID, event_L_Name, e_Managemet_Unit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_second
+    where event_L_ID = #{eventLId,jdbcType=INTEGER}
+  </select>
+  <select id="findByFirst" parameterType="Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_second
+    where event_B_ID = #{eventBId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from event_second
+    where event_L_ID = #{eventLId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.EventSecond">
+    insert into event_second (event_L_ID, Event_B_ID, event_L_Name, 
+      e_Managemet_Unit)
+    values (#{eventLId,jdbcType=INTEGER}, #{eventBId,jdbcType=INTEGER}, #{eventLName,jdbcType=VARCHAR}, 
+      #{eManagemetUnit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.EventSecond">
+    insert into event_second
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventLId != null">
+        event_L_ID,
+      </if>
+      <if test="eventBId != null">
+        Event_B_ID,
+      </if>
+      <if test="eventLName != null and !&quot;&quot;.equals(eventLName.trim())">
+        event_L_Name,
+      </if>
+      <if test="eManagemetUnit != null and !&quot;&quot;.equals(partLName.trim())">
+        e_Managemet_Unit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventLId != null">
+        #{eventLId,jdbcType=INTEGER},
+      </if>
+      <if test="eventBId != null">
+        #{eventBId,jdbcType=INTEGER},
+      </if>
+      <if test="eventLName != null">
+        #{eventLName,jdbcType=VARCHAR},
+      </if>
+      <if test="eManagemetUnit != null">
+        #{eManagemetUnit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.EventSecond">
+    update event_second
+    <set>
+      <if test="eventBId != null">
+        Event_B_ID = #{eventBId,jdbcType=INTEGER},
+      </if>
+      <if test="eventLName != null and !&quot;&quot;.equals(eventLName.trim())">
+        event_L_Name = #{eventLName,jdbcType=VARCHAR},
+      </if>
+      <if test="eManagemetUnit != null and !&quot;&quot;.equals(partLName.trim())">
+        e_Managemet_Unit = #{eManagemetUnit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where event_L_ID = #{eventLId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.EventSecond">
+    update event_second
+    set Event_B_ID = #{eventBId,jdbcType=INTEGER},
+      event_L_Name = #{eventLName,jdbcType=VARCHAR},
+      e_Managemet_Unit = #{eManagemetUnit,jdbcType=VARCHAR}
+    where event_L_ID = #{eventLId,jdbcType=INTEGER}
+  </update>
+</mapper>

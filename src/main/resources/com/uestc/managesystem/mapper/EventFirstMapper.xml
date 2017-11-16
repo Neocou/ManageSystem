@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.EventFirstMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.EventFirst">
+    <id column="Event_B_ID" jdbcType="INTEGER" property="eventBId" />
+    <result column="Event_B_Name" jdbcType="VARCHAR" property="eventBName" />
+    <collection property="eventSeconds" resultMap="com.uestc.managesystem.mapper.EventSecondMapper.BaseResultMap" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Event_B_ID, Event_B_Name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from event_first
+    where Event_B_ID = #{eventBId,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select event_first.Event_B_ID, Event_B_Name,event_L_ID,event_L_Name
+    from event_first left join event_second on event_first.Event_B_ID = event_second.Event_B_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from event_first
+    where Event_B_ID = #{eventBId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.EventFirst">
+    insert into event_first (Event_B_ID, Event_B_Name)
+    values (#{eventBId,jdbcType=INTEGER}, #{eventBName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.EventFirst">
+    insert into event_first
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventBId != null">
+        Event_B_ID,
+      </if>
+      <if test="eventBName != null">
+        Event_B_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventBId != null">
+        #{eventBId,jdbcType=INTEGER},
+      </if>
+      <if test="eventBName != null">
+        #{eventBName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.EventFirst">
+    update event_first
+    <set>
+      <if test="eventBName != null">
+        Event_B_Name = #{eventBName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Event_B_ID = #{eventBId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.EventFirst">
+    update event_first
+    set Event_B_Name = #{eventBName,jdbcType=VARCHAR}
+    where Event_B_ID = #{eventBId,jdbcType=INTEGER}
+  </update>
+</mapper>

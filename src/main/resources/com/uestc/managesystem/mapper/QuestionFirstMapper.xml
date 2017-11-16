@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.QuestionFirstMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.QuestionFirst">
+    <id column="ques_B_ID" jdbcType="INTEGER" property="quesBId" />
+    <result column="ques_B_Name" jdbcType="VARCHAR" property="quesBName" />
+    <collection property="questionDetails" resultMap="com.uestc.managesystem.mapper.QuestionDetailsMapper.BaseResultMap"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    ques_B_ID, ques_B_Name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_first
+    where ques_B_ID = #{quesBId,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select question_first.ques_B_ID,ques_B_Name,ques_L_ID,ques_L_Name,answer
+    from question_first left join question_details on question_first.ques_B_ID = question_details.ques_B_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question_first
+    where ques_B_ID = #{quesBId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.QuestionFirst">
+    insert into question_first (ques_B_ID, ques_B_Name)
+    values (#{quesBId,jdbcType=INTEGER}, #{quesBName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.QuestionFirst">
+    insert into question_first
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="quesBId != null">
+        ques_B_ID,
+      </if>
+      <if test="quesBName != null">
+        ques_B_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="quesBId != null">
+        #{quesBId,jdbcType=INTEGER},
+      </if>
+      <if test="quesBName != null">
+        #{quesBName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.QuestionFirst">
+    update question_first
+    <set>
+      <if test="quesBName != null">
+        ques_B_Name = #{quesBName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ques_B_ID = #{quesBId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.QuestionFirst">
+    update question_first
+    set ques_B_Name = #{quesBName,jdbcType=VARCHAR}
+    where ques_B_ID = #{quesBId,jdbcType=INTEGER}
+  </update>
+</mapper>

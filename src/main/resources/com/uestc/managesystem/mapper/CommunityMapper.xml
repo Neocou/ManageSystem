@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.CommunityMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Community">
+    <id column="community_ID" jdbcType="INTEGER" property="communityId" />
+    <result column="street_ID" jdbcType="INTEGER" property="streetId" />
+    <result column="comm_Name" jdbcType="VARCHAR" property="commName" />
+    <result column="comm_Information" jdbcType="LONGVARCHAR" property="commInformation" />
+    <collection property="grids" resultMap="com.uestc.managesystem.mapper.GridMapper.BaseResultMap" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    community_ID, street_ID, comm_Name,comm_Information
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from community
+    where community_ID = #{communityId,jdbcType=INTEGER}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from community
+    where community_ID = #{communityId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Community">
+    insert into community (community_ID, street_ID, comm_Name, 
+      comm_Information)
+    values (#{communityId,jdbcType=INTEGER}, #{streetId,jdbcType=INTEGER}, #{commName,jdbcType=VARCHAR}, 
+      #{commInformation,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Community">
+    insert into community
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="communityId != null">
+        community_ID,
+      </if>
+      <if test="streetId != null">
+        street_ID,
+      </if>
+      <if test="commName != null">
+        comm_Name,
+      </if>
+      <if test="commInformation != null">
+        comm_Information,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="communityId != null">
+        #{communityId,jdbcType=INTEGER},
+      </if>
+      <if test="streetId != null">
+        #{streetId,jdbcType=INTEGER},
+      </if>
+      <if test="commName != null">
+        #{commName,jdbcType=VARCHAR},
+      </if>
+      <if test="commInformation != null">
+        #{commInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Community">
+    update community
+    <set>
+      <if test="streetId != null">
+        street_ID = #{streetId,jdbcType=INTEGER},
+      </if>
+      <if test="commName != null">
+        comm_Name = #{commName,jdbcType=VARCHAR},
+      </if>
+      <if test="commInformation != null">
+        comm_Information = #{commInformation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where community_ID = #{communityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.Community">
+    update community
+    set street_ID = #{streetId,jdbcType=INTEGER},
+      comm_Name = #{commName,jdbcType=VARCHAR},
+      comm_Information = #{commInformation,jdbcType=LONGVARCHAR}
+    where community_ID = #{communityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Community">
+    update community
+    set street_ID = #{streetId,jdbcType=INTEGER},
+      comm_Name = #{commName,jdbcType=VARCHAR}
+    where community_ID = #{communityId,jdbcType=INTEGER}
+  </update>
+</mapper>

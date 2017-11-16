@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.CasesMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Cases">
+    <id column="case_ID" jdbcType="INTEGER" property="caseId" />
+    <result column="event_L_ID" jdbcType="INTEGER" property="eventLId" />
+    <result column="part_L_ID" jdbcType="INTEGER" property="partLId" />
+    <result column="grid_ID" jdbcType="INTEGER" property="gridId" />
+    <result column="stage" jdbcType="VARCHAR" property="stage" />
+    <result column="time_Limit" jdbcType="INTEGER" property="timeLimit" />
+    <result column="case_Describe" jdbcType="VARCHAR" property="caseDescribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    case_ID, event_L_ID, part_L_ID, grid_ID, stage, time_Limit, case_Describe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cases
+    where case_ID = #{caseId,jdbcType=INTEGER}
+  </select>
+  <select id="findAllNo"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cases
+    where stage = '待进行'
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cases order by stage
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cases
+    where case_ID = #{caseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Cases">
+    insert into cases (case_ID, event_L_ID, part_L_ID, 
+      grid_ID, stage, time_Limit, 
+      case_Describe)
+    values (#{caseId,jdbcType=INTEGER}, #{eventLId,jdbcType=INTEGER}, #{partLId,jdbcType=INTEGER}, 
+      #{gridId,jdbcType=INTEGER}, #{stage,jdbcType=VARCHAR}, #{timeLimit,jdbcType=INTEGER}, 
+      #{caseDescribe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Cases">
+    insert into cases
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="caseId != null">
+        case_ID,
+      </if>
+      <if test="eventLId != null">
+        event_L_ID,
+      </if>
+      <if test="partLId != null">
+        part_L_ID,
+      </if>
+      <if test="gridId != null">
+        grid_ID,
+      </if>
+      <if test="stage != null">
+        stage,
+      </if>
+      <if test="timeLimit != null">
+        time_Limit,
+      </if>
+      <if test="caseDescribe != null">
+        case_Describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="eventLId != null">
+        #{eventLId,jdbcType=INTEGER},
+      </if>
+      <if test="partLId != null">
+        #{partLId,jdbcType=INTEGER},
+      </if>
+      <if test="gridId != null">
+        #{gridId,jdbcType=INTEGER},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="caseDescribe != null">
+        #{caseDescribe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Cases">
+    update cases
+    <set>
+      <if test="eventLId != null">
+        event_L_ID = #{eventLId,jdbcType=INTEGER},
+      </if>
+      <if test="partLId != null">
+        part_L_ID = #{partLId,jdbcType=INTEGER},
+      </if>
+      <if test="gridId != null">
+        grid_ID = #{gridId,jdbcType=INTEGER},
+      </if>
+      <if test="stage != null">
+        stage = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        time_Limit = #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="caseDescribe != null">
+        case_Describe = #{caseDescribe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where case_ID = #{caseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Cases">
+    update cases
+    set event_L_ID = #{eventLId,jdbcType=INTEGER},
+      part_L_ID = #{partLId,jdbcType=INTEGER},
+      grid_ID = #{gridId,jdbcType=INTEGER},
+      stage = #{stage,jdbcType=VARCHAR},
+      time_Limit = #{timeLimit,jdbcType=INTEGER},
+      case_Describe = #{caseDescribe,jdbcType=VARCHAR}
+    where case_ID = #{caseId,jdbcType=INTEGER}
+  </update>
+</mapper>

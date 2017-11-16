@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Post">
+    <id column="post_Num" jdbcType="INTEGER" property="postNum" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.uestc.managesystem.entity.model.Post">
+    <result column="p_Discribe" jdbcType="LONGVARCHAR" property="pDiscribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    post_Num, post_name,p_Discribe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    from post
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from post
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Post">
+    insert into post (post_Num, post_name, p_Discribe
+      )
+    values (#{postNum,jdbcType=INTEGER}, #{postName,jdbcType=VARCHAR}, #{pDiscribe,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Post">
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postNum != null ">
+        post_Num,
+      </if>
+      <if test="postName != null and !&quot;&quot;.equals(postName.trim())">
+        post_name,
+      </if>
+      <if test="pDiscribe != null and !&quot;&quot;.equals(pDiscribe.trim()) ">
+        p_Discribe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postNum != null">
+        #{postNum,jdbcType=INTEGER},
+      </if>
+      <if test="postName != null and !&quot;&quot;.equals(postName.trim())">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="pDiscribe != null and !&quot;&quot;.equals(pDiscribe.trim()) ">
+        #{pDiscribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Post">
+    update post
+    <set>
+      <if test="postName != null and !&quot;&quot;.equals(postName.trim())">
+        post_name = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="pDiscribe != null and !&quot;&quot;.equals(pDiscribe.trim()) ">
+        p_Discribe = #{pDiscribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.Post">
+    update post
+    set post_name = #{postName,jdbcType=VARCHAR},
+      p_Discribe = #{pDiscribe,jdbcType=LONGVARCHAR}
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Post">
+    update post
+    set post_name = #{postName,jdbcType=VARCHAR}
+    where post_Num = #{postNum,jdbcType=INTEGER}
+  </update>
+</mapper>

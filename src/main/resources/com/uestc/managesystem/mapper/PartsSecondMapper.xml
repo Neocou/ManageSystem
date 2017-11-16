@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.PartsSecondMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.PartsSecond">
+    <id column="part_L_ID" jdbcType="INTEGER" property="partLId" />
+    <result column="part_B_ID" jdbcType="INTEGER" property="partBId" />
+    <result column="part_L_Name" jdbcType="VARCHAR" property="partLName" />
+    <result column="part_Manage_Unit" jdbcType="VARCHAR" property="partManageUnit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    part_L_ID, part_B_ID, part_L_Name, part_Manage_Unit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parts_second
+    where part_L_ID = #{partLId,jdbcType=INTEGER}
+  </select>
+  <select id="findByFirst" parameterType="Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parts_second
+    where part_B_ID = #{partBId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parts_second
+    where part_L_ID = #{partLId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.PartsSecond">
+    insert into parts_second (part_L_ID, part_B_ID, part_L_Name, 
+      part_Manage_Unit)
+    values (#{partLId,jdbcType=INTEGER}, #{partBId,jdbcType=INTEGER}, #{partLName,jdbcType=VARCHAR}, 
+      #{partManageUnit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.PartsSecond">
+    insert ignore into parts_second
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partLId != null">
+        part_L_ID,
+      </if>
+      <if test="partBId != null">
+        part_B_ID,
+      </if>
+      <if test="partLName != null and !&quot;&quot;.equals(partLName.trim())">
+        part_L_Name,
+      </if>
+      <if test="partManageUnit != null and !&quot;&quot;.equals(partManageUnit.trim())">
+        part_Manage_Unit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="partLId != null">
+        #{partLId,jdbcType=INTEGER},
+      </if>
+      <if test="partBId != null">
+        #{partBId,jdbcType=INTEGER},
+      </if>
+      <if test="partLName != null">
+        #{partLName,jdbcType=VARCHAR},
+      </if>
+      <if test="partManageUnit != null">
+        #{partManageUnit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.PartsSecond">
+    update parts_second
+    <set>
+      <if test="partBId != null">
+        part_B_ID = #{partBId,jdbcType=INTEGER},
+      </if>
+      <if test="partLName != null">
+        part_L_Name = #{partLName,jdbcType=VARCHAR},
+      </if>
+      <if test="partManageUnit != null">
+        part_Manage_Unit = #{partManageUnit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where part_L_ID = #{partLId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.PartsSecond">
+    update parts_second
+    set part_B_ID = #{partBId,jdbcType=INTEGER},
+      part_L_Name = #{partLName,jdbcType=VARCHAR},
+      part_Manage_Unit = #{partManageUnit,jdbcType=VARCHAR}
+    where part_L_ID = #{partLId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Role">
+    <id column="role_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="role_Name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_Describe" jdbcType="LONGVARCHAR" property="roleDescribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_ID, role_Name,role_Describe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Role">
+    insert into role (role_ID, role_Name, role_Describe
+      )
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleDescribe,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_ID,
+      </if>
+      <if test="roleName != null and !&quot;&quot;.equals(roleName.trim())">
+        role_Name,
+      </if>
+      <if test="roleDescribe != null and !&quot;&quot;.equals(roleDescribe.trim()) ">
+        role_Describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null and !&quot;&quot;.equals(roleName.trim())">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescribe != null and !&quot;&quot;.equals(roleDescribe.trim()) ">
+        #{roleDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        role_Name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescribe != null">
+        role_Describe = #{roleDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.Role">
+    update role
+    set role_Name = #{roleName,jdbcType=VARCHAR},
+      role_Describe = #{roleDescribe,jdbcType=LONGVARCHAR}
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Role">
+    update role
+    set role_Name = #{roleName,jdbcType=VARCHAR}
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

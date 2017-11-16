@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.PowerMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.Power">
+    <id column="power_ID" jdbcType="INTEGER" property="powerId" />
+    <result column="power_Name" jdbcType="VARCHAR" property="powerName" />
+    <result column="power_Describe" jdbcType="LONGVARCHAR" property="powerDescribe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    power_ID, power_Name,power_Describe
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from power
+    where power_ID = #{powerId,jdbcType=INTEGER}
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from power
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from power
+    where power_ID = #{powerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.Power">
+    insert into power (power_ID, power_Name, power_Describe
+      )
+    values (#{powerId,jdbcType=INTEGER}, #{powerName,jdbcType=VARCHAR}, #{powerDescribe,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.Power">
+    insert into power
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="powerId != null">
+        power_ID,
+      </if>
+      <if test="powerName != null">
+        power_Name,
+      </if>
+      <if test="powerDescribe != null">
+        power_Describe,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="powerId != null">
+        #{powerId,jdbcType=INTEGER},
+      </if>
+      <if test="powerName != null">
+        #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDescribe != null">
+        #{powerDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.Power">
+    update power
+    <set>
+      <if test="powerName != null">
+        power_Name = #{powerName,jdbcType=VARCHAR},
+      </if>
+      <if test="powerDescribe != null">
+        power_Describe = #{powerDescribe,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where power_ID = #{powerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.uestc.managesystem.entity.model.Power">
+    update power
+    set power_Name = #{powerName,jdbcType=VARCHAR},
+      power_Describe = #{powerDescribe,jdbcType=LONGVARCHAR}
+    where power_ID = #{powerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.Power">
+    update power
+    set power_Name = #{powerName,jdbcType=VARCHAR}
+    where power_ID = #{powerId,jdbcType=INTEGER}
+  </update>
+</mapper>

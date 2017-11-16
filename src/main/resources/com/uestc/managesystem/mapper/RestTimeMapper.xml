@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.RestTimeMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.RestTime">
+    <id column="Rest_Num" jdbcType="INTEGER" property="restNum" />
+    <result column="start_Time" jdbcType="DATE" property="startTime" />
+    <result column="end_Time" jdbcType="DATE" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Rest_Num, start_Time, end_Time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rest_time
+    where Rest_Num = #{restNum,jdbcType=INTEGER}
+  </select>
+  <select id="findNext"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rest_time where
+    start_Time = (select start_Time  from rest_time where end_Time> curdate() ORDER BY start_Time  LIMIT 1)
+  </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from rest_time
+    where end_Time> curdate()
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from rest_time
+    where Rest_Num = #{restNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.RestTime">
+    insert into rest_time (Rest_Num, start_Time, end_Time
+      )
+    values (#{restNum,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.RestTime">
+    insert into rest_time
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="restNum != null">
+        Rest_Num,
+      </if>
+      <if test="startTime != null">
+        start_Time,
+      </if>
+      <if test="endTime != null">
+        end_Time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="restNum != null">
+        #{restNum,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.RestTime">
+    update rest_time
+    <set>
+      <if test="startTime != null">
+        start_Time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null">
+        end_Time = #{endTime,jdbcType=DATE},
+      </if>
+    </set>
+    where Rest_Num = #{restNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.RestTime">
+    update rest_time
+    set start_Time = #{startTime,jdbcType=DATE},
+      end_Time = #{endTime,jdbcType=DATE}
+    where Rest_Num = #{restNum,jdbcType=INTEGER}
+  </update>
+</mapper>

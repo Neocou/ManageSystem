@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.UserGridMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.UserGrid">
+    <result column="grid_ID" jdbcType="INTEGER" property="gridId" />
+    <result column="user_Number" jdbcType="INTEGER" property="userNumber" />
+  </resultMap>
+ <select id="selectGridId" parameterType="Integer" resultType="Integer">
+    select 
+    grid_ID
+    from user_grid
+    where user_Number = #{userNumber,jdbcType=INTEGER} 
+  </select>
+ <select id="getUsers" parameterType="Integer" resultType="Integer">
+    select 
+    user_Number
+    from user_grid
+    where grid_ID = #{gridId,jdbcType=INTEGER} 
+  </select>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.UserGrid">
+    insert ignore into user_grid (grid_ID, user_Number)
+    values (#{gridId,jdbcType=INTEGER}, #{userNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.UserGrid">
+    insert into user_grid
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gridId != null">
+        grid_ID,
+      </if>
+      <if test="userNumber != null">
+        user_Number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gridId != null">
+        #{gridId,jdbcType=INTEGER},
+      </if>
+      <if test="userNumber != null">
+        #{userNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <delete id="delete" parameterType="com.uestc.managesystem.entity.model.UserGrid">
+    delete from user_grid
+    where user_Number = #{userNumber,jdbcType=INTEGER} and grid_ID  = #{gridId,jdbcType=INTEGER}
+  </delete>
+</mapper>

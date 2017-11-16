@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uestc.managesystem.mapper.PartsFirstMapper">
+  <resultMap id="BaseResultMap" type="com.uestc.managesystem.entity.model.PartsFirst">
+    <id column="part_B_ID" jdbcType="INTEGER" property="partBId" />
+    <result column="part_B_Name" jdbcType="VARCHAR" property="partBName" />
+    <collection property="partsSeconds" resultMap="com.uestc.managesystem.mapper.PartsSecondMapper.BaseResultMap" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    part_B_ID, part_B_Name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from parts_first
+    where part_B_ID = #{partBId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="findAll"  resultMap="BaseResultMap">
+    select parts_first.part_B_ID,part_B_Name,part_L_ID,part_L_Name
+    from parts_first left join parts_second on parts_first.part_B_ID = parts_second.part_B_ID
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parts_first
+    where part_B_ID = #{partBId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.uestc.managesystem.entity.model.PartsFirst">
+    insert into parts_first (part_B_ID, part_B_Name)
+    values (#{partBId,jdbcType=INTEGER}, #{partBName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.uestc.managesystem.entity.model.PartsFirst">
+    insert into parts_first
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="partBId != null">
+        part_B_ID,
+      </if>
+      <if test="partBName != null">
+        part_B_Name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="partBId != null">
+        #{partBId,jdbcType=INTEGER},
+      </if>
+      <if test="partBName != null">
+        #{partBName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.uestc.managesystem.entity.model.PartsFirst">
+    update parts_first
+    <set>
+      <if test="partBName != null">
+        part_B_Name = #{partBName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where part_B_ID = #{partBId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.uestc.managesystem.entity.model.PartsFirst">
+    update parts_first
+    set part_B_Name = #{partBName,jdbcType=VARCHAR}
+    where part_B_ID = #{partBId,jdbcType=INTEGER}
+  </update>
+</mapper>
