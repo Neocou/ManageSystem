@@ -1,5 +1,5 @@
 # ManageSystem
-城市信息管理系统<br>
+<h1>城市信息管理系统</h1><br>
 
 
 #继上次外勤管理系统后的第二个JavaEE项目<br>
@@ -26,3 +26,25 @@
 
 #注意jdbc和log4j都有数据库配置信息要改
 
+![1](https://github.com/Neocou/ManageSystem/blob/master/pic/1.PNG)
+![2](https://github.com/Neocou/ManageSystem/blob/master/pic/2.PNG)
+![3](https://github.com/Neocou/ManageSystem/blob/master/pic/3.PNG)
+![4](https://github.com/Neocou/ManageSystem/blob/master/pic/4.PNG)
+![5](https://github.com/Neocou/ManageSystem/blob/master/pic/5.PNG)
+![6](https://github.com/Neocou/ManageSystem/blob/master/pic/6.PNG)
+![7](https://github.com/Neocou/ManageSystem/blob/master/pic/7.PNG)
+![8](https://github.com/Neocou/ManageSystem/blob/master/pic/8.PNG)
+![9](https://github.com/Neocou/ManageSystem/blob/master/pic/9.PNG)
+![10](https://github.com/Neocou/ManageSystem/blob/master/pic/10.PNG)
+![11](https://github.com/Neocou/ManageSystem/blob/master/pic/11.PNG)
+![12](https://github.com/Neocou/ManageSystem/blob/master/pic/12.PNG)
+![13](https://github.com/Neocou/ManageSystem/blob/master/pic/13.PNG)
+![14](https://github.com/Neocou/ManageSystem/blob/master/pic/14.PNG)
+![15](https://github.com/Neocou/ManageSystem/blob/master/pic/15.PNG)
+![16](https://github.com/Neocou/ManageSystem/blob/master/pic/16.PNG)
+![17](https://github.com/Neocou/ManageSystem/blob/master/pic/17.PNG)
+![18](https://github.com/Neocou/ManageSystem/blob/master/pic/18.PNG)
+![19](https://github.com/Neocou/ManageSystem/blob/master/pic/19.PNG)
+
+
+<h2>图片好像多了,就这样吧啊，看着不顺眼再改，编辑文档真麻烦</h2>
