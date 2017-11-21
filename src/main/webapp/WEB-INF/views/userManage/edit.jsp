@@ -10,7 +10,7 @@
 	<c:choose>
 		<c:when test="${ param.editmesg==1 }">
 			<script >alert("更新成功")</script>
-			</c:when>
+		</c:when>
 		<c:when test="${ param.editmesg==0 }">
 			<script >alert("更新失败")</script>
 		</c:when>
@@ -47,12 +47,16 @@
 		                                    <td >性别</td>
 		                                    <td>
 		                                 <select name ="gender" class = "form-control"  >
-			                           	 <c:if test = "${result.gender eq '女' } ">
-			                           	 	<option >男</option>
-		                                    <option selected="selected">女</option>
-			                           	 </c:if>
-			                           	 	<option selected="selected">男</option>
-		                                    <option >女</option>
+			                           	 <c:choose>
+				                           	 <c:when test="${result.gender=='女'}">
+				                           	 	<option>男</option>
+			                                    <option selected="selected">女</option>
+				                           	 </c:when>
+				                           	 <c:otherwise>
+				                           	 	<option selected="selected">男</option>
+			                                    <option>女</option>
+			                                 </c:otherwise>
+		                                 </c:choose>
 		                                 </select>
 											</td>
 		                                <tr>

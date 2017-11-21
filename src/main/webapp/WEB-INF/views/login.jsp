@@ -7,12 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理系统登录页面</title>
 	<%@ include file="common/js.jsp"%> 
-		<c:if test="${param.mesg == 0}">
+	<c:choose>
+		<c:when test="${param.mesg == 0}">
     		<script >alert("请先登陆！")</script>
-    	</c:if>
-		<c:if test="${param.mesg == 1}">
+    	</c:when>
+		<c:when test="${param.mesg == 1}">
     		<script >alert("你已经退出登陆。")</script>
-    	</c:if>
+    	</c:when>
+    </c:choose>
     	<c:if test="${param.loginmesg == 0}">
     		<script >alert("密码或者账号不正确！")</script>
     	</c:if>

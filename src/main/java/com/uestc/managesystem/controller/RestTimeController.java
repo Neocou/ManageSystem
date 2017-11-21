@@ -2,12 +2,17 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.uestc.managesystem.entity.model.RestTime;
 import com.uestc.managesystem.service.serviceInter.RestTimeService;
@@ -92,5 +97,16 @@ public class RestTimeController {
 		else{
 			return "redirect:/restTime/edit/"+restTime.getRestNum()+"?editmesg=1";
 		}
+	}
+	/**定时模块：每天24点开始
+	 * 查看是否休息日模块
+	 * 获取ServletContext添加属性标记是否假日
+	 */
+	@Scheduled(cron="0 0 0 * * ?" )
+	public void judge(){
+		WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
+		ServletContext application = webApplicationContext.getServletContext();//获取ServletContext
+		String  restMesg =  restTimeService.judge();
+		application.setAttribute("restMesg", restMesg);
 	}
 }

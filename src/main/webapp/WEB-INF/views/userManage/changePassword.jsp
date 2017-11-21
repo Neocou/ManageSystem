@@ -35,12 +35,12 @@
     }
 </script>
 	<c:choose>
-	<c:when test="${ param.mesg==0 }">
-		<script >alert("修改失败")</script>
+		<c:when test="${ param.mesg==0 }">
+			<script >alert("修改失败")</script>
+			</c:when>
+		<c:when test="${ param.mesg==1 }">
+			<script >alert("修改成功")</script>
 		</c:when>
-	<c:when test="${ param.mesg==1 }">
-		<script >alert("修改成功")</script>
-	</c:when>
 	</c:choose>
 
 </head>

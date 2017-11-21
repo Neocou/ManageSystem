@@ -17,7 +17,7 @@
 	                       	<li>岗位:${userinfo.postName}</li>
 	                       	<li>账号属于:${userinfo.roles}</li>
 	                       	<li>负责区域:${userinfo.grids}</li>
-	                       	<li>提醒你:${restMesg}!</li>
+	                       	<li>提醒你:${applicationScope.restMesg}</li>
 	                </ul>
                 </div>
             </div>

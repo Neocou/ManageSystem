@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>操作错误界面</title>
+<title>寻无此处界面</title>
 </head>
 <body>
- <h1>操作失败！</h1><br>
- <h2>报错: <c:out value="${ex.message }"></c:out></h2>
+ <h1>打开失败！</h1><br>
+ <h2>没有这个界面啊,别乱点。</h2>
 </body>
 </html>

@@ -37,12 +37,16 @@
 			                            <td>性别</td>
 			                            <td>
 			                           	 <select  class = "form-control" name ="gender" >
-			                           	 <c:if test = "${userinfo.gender eq '女' } ">
-			                           	 	<option >男</option>
-		                                    <option selected="selected">女</option>
-			                           	 </c:if>
-			                           	 	<option selected="selected">男</option>
-		                                    <option >女</option>
+			                           	 <c:choose>
+				                           	 <c:when test="${userinfo.gender=='女'}">
+				                           	 	<option>男</option>
+			                                    <option selected="selected">女</option>
+				                           	 </c:when>
+				                           	 <c:otherwise>
+				                           	 	<option selected="selected">男</option>
+			                                    <option>女</option>
+			                                 </c:otherwise>
+		                                 </c:choose>
 		                                 </select>
 		                                 </td>
 			                            <td>年龄</td>
@@ -68,6 +72,7 @@
 			                            <td><Button type="button" class="btn btn-success" onclick =  "window.location.href='http://localhost:8080/ManageSystem/personinfo/password'" >修改密码</Button></td>
 			                        </tr>
 			                    </table>
+			                    <input type = "hidden" value = "${userinfo.gender }"/>
 			                    <input type="submit" value="更新" onclick="if(confirm('确认更改信息吗')){return true;}else return false;" class="btn btn-success"/>
 			                </form>
 			            </div>   

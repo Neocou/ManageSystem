@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uestc.managesystem.entity.dto.UserSelect;
 import com.uestc.managesystem.entity.model.User;
-import com.uestc.managesystem.service.serviceInter.RestTimeService;
 import com.uestc.managesystem.service.serviceInter.UserService;
 
 @Controller
@@ -21,8 +20,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private RestTimeService restTimeService;
+
 	/**
 	 * 默认登陆页面
 	 * @return
@@ -48,12 +46,10 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(User user,HttpSession session) {
 		User userResult = userService.login(user);
-		String  restMesg =  restTimeService.judge();
 		if(userResult==null){
 			return "redirect:login?loginmesg=0";
 		}
 		userService.setOnline(userResult);
-		session.setAttribute("restMesg", restMesg);
 		session.setAttribute("userinfo", userResult);
 		return "redirect:home";
 	}
