@@ -99,12 +99,7 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	@Override
-	public List<User> selectAll() {
-		// TODO Auto-generated method stub
-		List<User> users = userMapper.findAllUserResult();
-		return users;
-	}
+
 
 	@Override
 	public List<User> userSelect(UserSelect userSelect) {
@@ -160,6 +155,27 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	@Override
+	public List<User> userSelectCommon(UserSelect userSelect) {
+		// TODO Auto-generated method stub
+		List<User> result = userMapper.userSelectCommon(userSelect);
+		return result;
+	}
+
+	@Override
+	public List<User> selectAllCommon() {
+		// TODO Auto-generated method stub
+		List<User> users = userMapper.findAllUserCommon();
+		return users;
+	}
+
+	@Override
+	public List<User> selectAllAdmin() {
+		// TODO Auto-generated method stub
+		List<User> users = userMapper.findAllUserAdmin();
+		return users;
 	}
 
 

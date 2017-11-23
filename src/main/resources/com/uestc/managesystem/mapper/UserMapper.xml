@@ -22,7 +22,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
+    user_Number, department_Num, post_Num, user_Name, gender, age, phone_Num
     from user
     where user_Number = #{userNumber,jdbcType=INTEGER}
   </select>
@@ -40,7 +40,7 @@
   </select>
   <select id="userSelect" parameterType="com.uestc.managesystem.entity.dto.UserSelect" resultMap="BaseResultMap">
     select 
-    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    user.user_Number,department_Name,post_Name, user_Name, gender, age, phone_Num,grid.grid_ID,role.role_ID,role_Name
     from user 
     left join department  
     on user.department_Num = department.department_Num 
@@ -48,12 +48,31 @@
     on user.post_Num = post.post_Num 
 		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
 		on user.user_Number = user_grid.user_Number
-		left join(user_role 
-									left join role 
-													on user_role.role_ID = role.role_ID
-									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
-													on	user_role.role_ID = 	role_power.role_ID	)
+		left join(user_role left join role on user_role.role_ID = role.role_ID)
 		on user.user_Number = user_role.user_Number
+	<where>
+      <if test="userNumber != null and userNumber != ''">
+        user.user_Number = #{userNumber,jdbcType=INTEGER}
+      </if>
+      <if test="departmentName != null and !&quot;&quot;.equals(departmentName.trim())">
+        AND department_Name like concat('%',#{departmentName},'%')
+      </if>
+      <if test="postName != null and !&quot;&quot;.equals(postName.trim())">
+        AND post_Name  like concat('%',#{postName},'%')
+      </if>
+      <if test="userName != null and !&quot;&quot;.equals(userName.trim())">
+        AND user_Name like concat('%',#{userName},'%')
+      </if>
+	</where>
+  </select>
+  <select id="userSelectCommon" parameterType="com.uestc.managesystem.entity.dto.UserSelect" resultMap="BaseResultMap">
+    select 
+    user.user_Number,department_Name,post_Name, user_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
 	<where>
       <if test="userNumber != null and userNumber != ''">
         user.user_Number = #{userNumber,jdbcType=INTEGER}
@@ -85,9 +104,18 @@
     user_Number,user_Name,user_status
     from user where user_status = #{user_status}
   </select>
-  <select id="findAllUserResult"  resultMap="BaseResultMap">
+  <select id="findAllUserCommon"  resultMap="BaseResultMap">
     select 
-    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    user.user_Number,department_Name,post_Name,user_Name
+    from user 
+    left join department  
+    on user.department_Num = department.department_Num 
+    left join post 
+    on user.post_Num = post.post_Num 
+  </select>
+  <select id="findAllUserAdmin"  resultMap="BaseResultMap">
+    select 
+    user.user_Number,department_Name,post_Name, user_Name, gender, age, phone_Num,grid.grid_ID,role.role_ID,role_Name
     from user 
     left join department  
     on user.department_Num = department.department_Num 
@@ -95,11 +123,7 @@
     on user.post_Num = post.post_Num 
 		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
 		on user.user_Number = user_grid.user_Number
-		left join(user_role 
-									left join role 
-													on user_role.role_ID = role.role_ID
-									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
-													on	user_role.role_ID = 	role_power.role_ID	)
+		left join(user_role left join role on user_role.role_ID = role.role_ID)
 		on user.user_Number = user_role.user_Number
   </select>
  <select id="selectByUser" parameterType="com.uestc.managesystem.entity.model.User" resultMap="BaseResultMap">
@@ -122,20 +146,12 @@
   </select>
  <select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
     select 
-    user.user_Number,user.post_Num,user.department_Num ,department_Name,post_Name,pass_Word, user_Name, gender, age, phone_Num,grid.grid_ID,grid_Information,role.role_ID,role_Name,power.power_ID,power_Name
+    user.user_Number,department_Name,post_Name, user_Name, gender, age, phone_Num
     from user 
     left join department  
     on user.department_Num = department.department_Num 
     left join post 
     on user.post_Num = post.post_Num 
-		left join(user_grid left join grid on user_grid.grid_ID = grid.grid_ID) 
-		on user.user_Number = user_grid.user_Number
-		left join(user_role 
-									left join role 
-													on user_role.role_ID = role.role_ID
-									left join	(role_power left join power on role_power.power_ID = power.power_ID)	
-													on	user_role.role_ID = 	role_power.role_ID	)
-		on user.user_Number = user_role.user_Number
     where user.user_Number = #{userNumber,jdbcType=INTEGER} 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

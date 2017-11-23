@@ -35,7 +35,6 @@ public interface UserMapper {
 
 	User selectById(int id);
 
-	List<User> findAllUserResult();
 
 
 	List<User> findByStatus(String status);
@@ -45,5 +44,11 @@ public interface UserMapper {
 	void setOffline(User userInfo);
 
 	List<User> findAllByStatus();
+
+	List<User> userSelectCommon(UserSelect userSelect);
+
+	List<User> findAllUserCommon();
+
+	List<User> findAllUserAdmin();
 
 }

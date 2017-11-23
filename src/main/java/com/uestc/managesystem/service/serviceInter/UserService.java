@@ -17,10 +17,12 @@ public interface UserService {
 	User login(User user);
 	User addUser(User user);
 	User getUserInfo(int id);
-	List<User> selectAll();
 	List<User> userSelect(UserSelect userSelect);
 	User selectByPrimaryKey(int id);
 	int changePassword(User user, String newPassword, String surePassword);
 	void setOnline(User userResult);
 	void setOffline(User userResult);
+	List<User> userSelectCommon(UserSelect userSelect);
+	List<User> selectAllCommon();
+	List<User> selectAllAdmin();
 }

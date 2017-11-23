@@ -70,7 +70,7 @@ public class UserManageController {
 	 */
 	@RequestMapping(value="/user/select",method=RequestMethod.GET)
 	public String select(Model model){
-		List<User> users = userService.selectAll();
+		List<User> users = userService.selectAllAdmin();
 		model.addAttribute("users", users);
 		return "userManage/select";
 	}

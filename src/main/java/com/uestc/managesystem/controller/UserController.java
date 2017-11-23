@@ -134,7 +134,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/users/select",method=RequestMethod.GET)
 	public String select(Model model){
-		List<User> users = userService.selectAll();
+		List<User> users = userService.selectAllCommon();
 		model.addAttribute("users", users);
 		return "userManage/commonSelect";
 	}
@@ -146,7 +146,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/users/select",method=RequestMethod.POST)
 	public String select(UserSelect userSelect,Model model){
-		List<User> users = userService.userSelect(userSelect);
+		List<User> users = userService.userSelectCommon(userSelect);
 		if(users==null){
 			return "redirect:userManage/commonSelect?mesg=0";
 		}
