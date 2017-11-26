@@ -90,7 +90,7 @@
   </select>
   <select id="findAllUser"  resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
+    user_Number, user_Name ,user_status
     from user
   </select>
   

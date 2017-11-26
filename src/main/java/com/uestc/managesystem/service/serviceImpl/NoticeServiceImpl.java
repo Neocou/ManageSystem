@@ -15,6 +15,9 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
+	/**
+	 * 查询所有公告
+	 */
 	@Override
 	public List<Notice> findAll() {
 		// TODO Auto-generated method stub
@@ -22,6 +25,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return notices;
 	}
 
+	/**
+	 * 根据公告ID查询公告
+	 */
 	@Override
 	public Notice selectNotice(int noticeid) {
 		// TODO Auto-generated method stub
@@ -29,6 +35,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return notice;
 	}
 
+	/**
+	 * 更新公告
+	 */
 	@Override
 	public int update(Notice notice) {
 		// TODO Auto-generated method stub
@@ -42,6 +51,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return i;
 	}
 
+	/**
+	 * 根据ID删除公告
+	 */
 	@Override
 	public int delete(int noticeid) {
 		// TODO Auto-generated method stub
@@ -55,6 +67,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return i;
 	}
 
+	/**
+	 * 新增公告
+	 */
 	@Override
 	public int insert(Notice notice) {
 		// TODO Auto-generated method stub

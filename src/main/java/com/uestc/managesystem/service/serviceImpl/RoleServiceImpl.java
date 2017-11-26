@@ -13,7 +13,9 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleMapper roleMapper;
-	
+	/**
+	 * 查询所有角色
+	 */
 	@Override
 	public List<Role> findAll() {
 		// TODO Auto-generated method stub
@@ -21,6 +23,9 @@ public class RoleServiceImpl implements RoleService {
 		return roles;
 	}
 
+	/**
+	 * 新增角色
+	 */
 	@Override
 	public int insert(Role role) {
 		// TODO Auto-generated method stub
@@ -34,6 +39,9 @@ public class RoleServiceImpl implements RoleService {
 		return i;
 	}
 
+	/**
+	 * 根据ID删除角色
+	 */
 	@Override
 	public int remove(int id) {
 		// TODO Auto-generated method stub
@@ -47,6 +55,9 @@ public class RoleServiceImpl implements RoleService {
 		return i;
 	}
 
+	/**
+	 * 根据ID查询角色
+	 */
 	@Override
 	public Role selectById(int id) {
 		// TODO Auto-generated method stub
@@ -55,6 +66,9 @@ public class RoleServiceImpl implements RoleService {
 		return role;
 	}
 
+	/**
+	 * 更新角色
+	 */
 	@Override
 	public int update(Role role) {
 		// TODO Auto-generated method stub

@@ -22,6 +22,9 @@ public class EventServiceImpl implements EventService {
 	private EventFirstMapper eventFirstMapper;
 	
 
+	/**
+	 * 查询所有事件分类
+	 */
 	@Override
 	public List<EventFirst> findAll() {
 		// TODO Auto-generated method stub
@@ -30,6 +33,9 @@ public class EventServiceImpl implements EventService {
 		return result;
 	}
 
+	/**
+	 * 根据Id查询事件分类
+	 */
 	@Override
 	public EventSecond selectById(int eventid) {
 		// TODO Auto-generated method stub
@@ -37,6 +43,9 @@ public class EventServiceImpl implements EventService {
 		return event;
 	}
 
+	/**
+	 * 更新事件分类
+	 */
 	@Override
 	public int update(EventSecond eventSecond) {
 		// TODO Auto-generated method stub
@@ -50,6 +59,9 @@ public class EventServiceImpl implements EventService {
 		return i;
 	}
 
+	/**
+	 * 删除事件分类
+	 */
 	@Override
 	public int remove(int id) {
 		// TODO Auto-generated method stub
@@ -63,6 +75,9 @@ public class EventServiceImpl implements EventService {
 		return i;
 	}
 
+	/**
+	 * 新增事件分类
+	 */
 	@Override
 	public int insert(EventSecond eventSecond) {
 		// TODO Auto-generated method stub

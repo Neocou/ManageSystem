@@ -22,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
 
 
+	/**
+	 * 更新用户信息
+	 */
 	@Override
 	public Integer updateUser(User user) {
 		try {
@@ -34,6 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	/**
+	 * 根据ID删除用户
+	 */
 	@Override
 	public Integer delUser(int id) {
 		// TODO Auto-generated method stub
@@ -42,12 +48,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	/**
+	 * 根据姓名查询用户
+	 */
 	@Override
 	public User getUsersByJobName(String Name) {
 		// TODO Auto-generated method stub
 		return userMapper.selectByName(Name);
 	}
 
+	/**
+	 * 根据部门ID查询用户
+	 */
 	@Override
 	public List<User> getUsersByDepartmentId(int departmentId) {
 		// TODO Auto-generated method stub
@@ -55,6 +67,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	/**
+	 * 用户登陆查询
+	 */
 	@Override
 	public User login(User user) {
 		User userResult=userMapper.selectByUser(user);
@@ -62,6 +77,9 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	/**
+	 * 查询所有用户
+	 */
 	@Override
 	public List<User> getUsers() {
 		List<User> users = userMapper.findAllUser();
@@ -69,12 +87,18 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+	/**
+	 * 根据岗位ID查询用户
+	 */
 	@Override
 	public List<User> getUsersByPost(int postId) {
 		// TODO Auto-generated method stub
 		return userMapper.selectByPostId(postId);
 	}
 
+	/**
+	 * 增加用户
+	 */
 	@Override
 	public User addUser(User user) {
 		// TODO Auto-generated method stub
@@ -87,6 +111,9 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	/**
+	 * 根据用户ID查询用户信息
+	 */
 	@Override
 	public User getUserInfo(int id) {
 		// TODO Auto-generated method stub
@@ -101,6 +128,9 @@ public class UserServiceImpl implements UserService {
 
 
 
+	/**
+	 * 多条件查询用户
+	 */
 	@Override
 	public List<User> userSelect(UserSelect userSelect) {
 		// TODO Auto-generated method stub
@@ -108,6 +138,9 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 根据用户ID查询用户
+	 */
 	@Override
 	public User selectByPrimaryKey(int id) {
 		// TODO Auto-generated method stub
@@ -115,7 +148,10 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-
+	
+	/**
+	 * 更改密码
+	 */
 	@Override
 	public int changePassword(User user,String newPassword, String surePassword) {
 		// TODO Auto-generated method stub
@@ -136,6 +172,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	/**
+	 * 设置用户在线
+	 */
 	@Override
 	public void setOnline(User userResult) {
 		// TODO Auto-generated method stub
@@ -147,6 +186,9 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	/**
+	 * 设置用户离线
+	 */
 	@Override
 	public void setOffline(User userResult) {
 		// TODO Auto-generated method stub
@@ -157,6 +199,9 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	/**
+	 * 公共多条件查询用户
+	 */
 	@Override
 	public List<User> userSelectCommon(UserSelect userSelect) {
 		// TODO Auto-generated method stub
@@ -164,6 +209,9 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	/**
+	 * 公共查询所有用户
+	 */
 	@Override
 	public List<User> selectAllCommon() {
 		// TODO Auto-generated method stub
@@ -171,6 +219,9 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+	/**
+	 * 管理员查询所有用户
+	 */
 	@Override
 	public List<User> selectAllAdmin() {
 		// TODO Auto-generated method stub

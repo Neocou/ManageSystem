@@ -17,6 +17,9 @@ public class PowerRoleServiceImpl implements PowerRoleService {
 	@Autowired
 	private RolePowerMapper rolePowerMapper;
 	
+	/**
+	 * 根据角色ID查询权限
+	 */
 	@Override
 	public List<Integer> selectPowers(int roleid) {
 		// TODO Auto-generated method stub
@@ -25,25 +28,10 @@ public class PowerRoleServiceImpl implements PowerRoleService {
 
 	}
 
-	@Override
-	public Integer countPower(int roleid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Integer removeAll(int roleid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insert(RolePower rolePower) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
-	
+	/**
+	 * 更新角色权限
+	 */
 	@Transactional
 	@Override
 	public int updatePowers(int[] powers, int roleid) {

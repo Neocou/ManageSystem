@@ -20,6 +20,9 @@ public class UserGridServiceImpl implements UserGridService {
 
 
 
+	/**
+	 * 删除一条负责区块记录
+	 */
 	@Override
 	public int delete(int userid, int grid) {
 		// TODO Auto-generated method stub
@@ -36,6 +39,9 @@ public class UserGridServiceImpl implements UserGridService {
 		return i;
 	}
 
+	/**
+	 * 增加一条负责区块记录
+	 */
 	@Override
 	public int add(int grid, int userid) {
 		// TODO Auto-generated method stub
@@ -52,6 +58,9 @@ public class UserGridServiceImpl implements UserGridService {
 		return i;
 	}
 
+	/**
+	 * 查询所有街道信息
+	 */
 	@Override
 	public List<Street> findAll() {
 		// TODO Auto-generated method stub
@@ -59,6 +68,9 @@ public class UserGridServiceImpl implements UserGridService {
 		return streets;
 	}
 
+	/**
+	 * 根据区块ID查询负责人
+	 */
 	@Override
 	public List<Integer> selectUser(int grid) {
 		// TODO Auto-generated method stub
@@ -66,6 +78,9 @@ public class UserGridServiceImpl implements UserGridService {
 		return users;
 	}
 
+	/**
+	 * 增加区块负责人
+	 */
 	@Override
 	public int add(UserGrid userGrid) {
 		// TODO Auto-generated method stub

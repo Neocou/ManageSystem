@@ -14,6 +14,9 @@ public class PowerServiceImpl implements PowerService {
 
 	@Autowired
 	private PowerMapper  powerMapper;
+	/**
+	 * 查询所有权限
+	 */
 	@Override
 	public List<Power> findAll() {
 		// TODO Auto-generated method stub

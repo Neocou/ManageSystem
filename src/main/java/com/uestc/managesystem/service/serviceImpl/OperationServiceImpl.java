@@ -16,6 +16,9 @@ public class OperationServiceImpl implements OperationService {
 	@Autowired
 	private OperationRecordMapper operationRecordMapper;
 	
+	/**
+	 * 查询所有操作记录
+	 */
 	@Override
 	public List<OperationRecord> findAll() {
 		// TODO Auto-generated method stub
@@ -23,6 +26,9 @@ public class OperationServiceImpl implements OperationService {
 		return records;
 	}
 
+	/**
+	 * 根据用户名查询操作记录
+	 */
 	@Override
 	public List<OperationRecord> findByName(String name) {
 		// TODO Auto-generated method stub
@@ -30,6 +36,9 @@ public class OperationServiceImpl implements OperationService {
 		return records;
 	}
 
+	/**
+	 * 根据用户ID查询操作记录
+	 */
 	@Override
 	public List<OperationRecord> findById(Integer userNumber) {
 		// TODO Auto-generated method stub
@@ -37,6 +46,9 @@ public class OperationServiceImpl implements OperationService {
 		return records;
 	}
 
+	/**
+	 * 根据用户查询记录
+	 */
 	@Override
 	public List<OperationRecord> findByUser(User user) {
 		// TODO Auto-generated method stub

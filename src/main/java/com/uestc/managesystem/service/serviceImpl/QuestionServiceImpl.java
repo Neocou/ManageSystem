@@ -20,6 +20,9 @@ public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	private QuestionFirstMapper questionFirstMapper;
 
+	/**
+	 * 查询所有问题分类
+	 */
 	@Override
 	public List<QuestionFirst> findAll() {
 		// TODO Auto-generated method stub
@@ -27,6 +30,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return result;
 	}
 
+	/**
+	 * 根据名字查询问题
+	 */
 	@Override
 	public List<QuestionDetails> select(String str) {
 		// TODO Auto-generated method stub
@@ -34,6 +40,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return result;
 	}
 
+	/**
+	 * 根据ID查询问题
+	 */
 	@Override
 	public QuestionDetails selectById(int questionid) {
 		// TODO Auto-generated method stub
@@ -41,6 +50,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return questions;
 	}
 
+	/**
+	 * 更新问题
+	 */
 	@Override
 	public int update(QuestionDetails questionDetails) {
 		// TODO Auto-generated method stub
@@ -54,14 +66,15 @@ public class QuestionServiceImpl implements QuestionService {
 		return i;
 	}
 
+	/**
+	 * 新增问题
+	 */
 	@Override
 	public int insert(QuestionDetails questionDetails) {
 		// TODO Auto-generated method stub
 		int i = 0;
 		try {
-			System.out.println(questionDetails);
 			i = questionDetailsMapper.insertSelective(questionDetails);
-			System.out.println(i);
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException("添加问题失败,请检查参数");
@@ -69,6 +82,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return i;
 	}
 
+	/**
+	 * 根据ID删除问题
+	 */
 	@Override
 	public int remove(int id) {
 		// TODO Auto-generated method stub
@@ -82,6 +98,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return i;
 	}
 
+	/**
+	 * 查询所有问题详情
+	 */
 	@Override
 	public List<QuestionDetails> findAllDetail() {
 		// TODO Auto-generated method stub
@@ -89,6 +108,9 @@ public class QuestionServiceImpl implements QuestionService {
 		return result;
 	}
 
+	/**
+	 * 多条件查询问题
+	 */
 	@Override
 	public List<QuestionDetails> questionSelect(QuestionSelect questionSelect) {
 		// TODO Auto-generated method stub

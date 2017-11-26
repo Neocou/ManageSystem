@@ -15,6 +15,9 @@ public class RestTimeServiceImpl implements RestTimeService {
 
 	@Autowired
 	private RestTimeMapper restTimeMapper;
+	/**
+	 * 判断今天是否工作日
+	 */
 	@Override
 	public String judge() {
 		// TODO Auto-generated method stub
@@ -31,12 +34,18 @@ public class RestTimeServiceImpl implements RestTimeService {
 		}
 		return "今天是工作日";
 	}
+	/**
+	 * 返回所有休息日
+	 */
 	@Override
 	public List<RestTime> findAll() {
 		// TODO Auto-generated method stub
 		List<RestTime> restTimes  = restTimeMapper.findAll();
 		return restTimes;
 	}
+	/**
+	 * 删除休息日
+	 */
 	@Override
 	public int delete(int restNum) {
 		// TODO Auto-generated method stub
@@ -49,6 +58,9 @@ public class RestTimeServiceImpl implements RestTimeService {
 		}
 		return i;
 	}
+	/**
+	 * 新增休息日
+	 */
 	@Override
 	public int insert(RestTime restTime) {
 		// TODO Auto-generated method stub
@@ -61,6 +73,9 @@ public class RestTimeServiceImpl implements RestTimeService {
 		}
 		return i;
 	}
+	/**
+	 * 根据ID查询休息日
+	 */
 	@Override
 	public RestTime selectById(int id) {
 		// TODO Auto-generated method stub
@@ -70,6 +85,9 @@ public class RestTimeServiceImpl implements RestTimeService {
 		}
 		return restTime;
 	}
+	/**
+	 * 更新休息日
+	 */
 	@Override
 	public int update(RestTime restTime) {
 		// TODO Auto-generated method stub

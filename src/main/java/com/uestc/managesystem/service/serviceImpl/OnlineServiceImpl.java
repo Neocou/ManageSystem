@@ -14,7 +14,9 @@ public class OnlineServiceImpl implements OnlineService {
 
 	@Autowired
 	private UserMapper userMapper;
-	
+	/**
+	 * 查询所有用户
+	 */
 	@Override
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
@@ -22,6 +24,9 @@ public class OnlineServiceImpl implements OnlineService {
 		return users;
 	}
 
+	/**
+	 * 根据状态查询用户
+	 */
 	@Override
 	public List<User> findByStatus(String status) {
 		// TODO Auto-generated method stub
@@ -29,6 +34,9 @@ public class OnlineServiceImpl implements OnlineService {
 		return users;
 	}
 
+	/**
+	 * 查询所有用户状态
+	 */
 	@Override
 	public List<User> findAllByStatus() {
 		// TODO Auto-generated method stub

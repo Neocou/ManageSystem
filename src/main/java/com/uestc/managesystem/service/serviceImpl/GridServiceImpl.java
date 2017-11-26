@@ -12,6 +12,9 @@ public class GridServiceImpl implements GridService {
 
 	@Autowired
 	private GridMapper gridMapper;
+	/**
+	 * 根据ID查询区块
+	 */
 	@Override
 	public Grid selectByPrimaryKey(Integer gridId) {
 		// TODO Auto-generated method stub

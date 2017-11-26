@@ -16,6 +16,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Autowired
 	private UserRoleMapper userRoleMapper;
 	
+	/**
+	 * 角色批量分配用户
+	 */
 	@Transactional
 	@Override
 	public int updateusers(int[] userids, int roleid) {

@@ -20,14 +20,17 @@ import com.uestc.managesystem.service.serviceInter.DBService;
 public class DBServiceImpl implements DBService {
 
 	
-
+	
+	/**
+	 * 数据库备份
+	 */
 	@Transactional
 	@Override
 	public void backup() {
 		// TODO Auto-generated method stub
 		try {
 			Runtime rt = Runtime.getRuntime();
-			Process child = rt.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -h localhost -uroot -pa425549873 managesystem");
+			Process child = rt.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -h localhost -uroot -ppassword managesystem");
 			InputStream in = child.getInputStream();
 			InputStreamReader xx = new InputStreamReader(in,"utf-8");
 			String inStr;
@@ -55,13 +58,17 @@ public class DBServiceImpl implements DBService {
 		}
 	}
 
+	/**
+	 * 数据库还原
+	 */
+	@Transactional
 	@Override
 	public void restore() {
 		// TODO Auto-generated method stub
 		try {
 			Runtime runtime = Runtime.getRuntime();
 			Process process = runtime
-			.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql.exe -hlocalhost -uroot -pa425549873 --default-character-set=utf8 managesystem");
+			.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql.exe -hlocalhost -uroot -ppassword --default-character-set=utf8 managesystem");
 			OutputStream outputStream = process.getOutputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:/Users/Administrator/workspace/ManageSystem/src/main/webapp/assets/db/dbrestore.sql"), "utf-8"));
 			String str = null;

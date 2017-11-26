@@ -20,20 +20,27 @@ public class PartServiceImpl implements PartService {
 	@Autowired
 	private PartsFirstMapper partsFirstMapper;
 	
+	/**
+	 * 查询所有部件分类
+	 */
 	@Override
 	public List<PartsFirst> findAll() {
 		// TODO Auto-generated method stub
 		List<PartsFirst> result = partsFirstMapper.findAll();
 		return result;
 	}
-
+	/**
+	 * 根据部件ID查询部件分类
+	 */
 	@Override
 	public PartsSecond selectById(int partid) {
 		// TODO Auto-generated method stub
 		PartsSecond part = partsSecondMapper.selectByPrimaryKey(partid);
 		return part;
 	}
-
+	/**
+	 * 更新部件分类
+	 */
 	@Override
 	public int update(PartsSecond partsSecond) {
 		// TODO Auto-generated method stub
@@ -48,6 +55,9 @@ public class PartServiceImpl implements PartService {
 		return i;
 	}
 
+	/**
+	 * 新增部件分类
+	 */
 	@Override
 	public int insert(PartsSecond partsSecond) {
 		// TODO Auto-generated method stub
@@ -61,6 +71,9 @@ public class PartServiceImpl implements PartService {
 		return i;
 	}
 
+	/**
+	 * 根据部件ID删除部件
+	 */
 	@Override
 	public int remove(int id) {
 		// TODO Auto-generated method stub

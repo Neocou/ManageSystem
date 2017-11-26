@@ -15,7 +15,9 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostMapper postMapper;
 	
-	
+	/**
+	 * 查询所有岗位
+	 */
 	@Override
 	public List<Post> findAll() {
 		// TODO Auto-generated method stub
@@ -23,6 +25,9 @@ public class PostServiceImpl implements PostService {
 		return posts;
 	}
 
+	/**
+	 * 新增岗位
+	 */
 	@Override
 	public int insert(Post post) {
 		// TODO Auto-generated method stub
@@ -36,6 +41,9 @@ public class PostServiceImpl implements PostService {
 		return i;
 	}
 
+	/**
+	 * 根据ID删除岗位
+	 */
 	@Override
 	public int remove(int id) {
 		// TODO Auto-generated method stub
@@ -50,6 +58,9 @@ public class PostServiceImpl implements PostService {
 		return i;
 	}
 
+	/**
+	 * 更新岗位
+	 */
 	@Override
 	public int update(Post post) {
 		// TODO Auto-generated method stub
@@ -63,6 +74,9 @@ public class PostServiceImpl implements PostService {
 		return i;
 	}
 
+	/**
+	 * 根据ID查询岗位
+	 */
 	@Override
 	public Post selectById(int id) {
 		// TODO Auto-generated method stub
