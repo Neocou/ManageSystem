@@ -40,4 +40,12 @@
       </if>
     </trim>
   </insert>
+  <delete id="removeAll" parameterType="java.lang.Integer">
+    delete from user_role
+    where role_ID = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <delete id="removeAllByUser" parameterType="java.lang.Integer">
+    delete from user_role
+    where user_Number = #{userNumber,jdbcType=INTEGER} 
+  </delete>
 </mapper>

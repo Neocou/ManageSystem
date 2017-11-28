@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uestc.managesystem.entity.dto.UserSelect;
+import com.uestc.managesystem.entity.model.Role;
 import com.uestc.managesystem.entity.model.User;
+import com.uestc.managesystem.service.serviceInter.RoleService;
+import com.uestc.managesystem.service.serviceInter.UserRoleService;
 import com.uestc.managesystem.service.serviceInter.UserService;
 
 @Controller
@@ -18,6 +21,10 @@ public class UserManageController {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserRoleService userRoleService;
+	@Autowired
+	private RoleService roleService;
 	/**
 	 * 用户管理模块
 	 * @return
@@ -106,6 +113,41 @@ public class UserManageController {
 			return "userManage/edit";
 		}
 	}
+	
+	/**
+	 * 指定ID用户角色分配
+	 * @param id 用户ID
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/user/edit/role/{id}",method=RequestMethod.GET)
+	public String editRole(@PathVariable("id")int id,Model model){
+		List<Integer> userRole = userRoleService.selectRoles(id);
+		List<Role>  roles = roleService.findAll();
+		model.addAttribute("roles", roles);
+		model.addAttribute("userRole", userRole);
+		model.addAttribute("userid", id);
+		return "userManage/userrole";
+		
+	}
+	/**
+	 * 指定ID用户角色分配
+	 * @param roleId 分配角色
+	 * @param userid 用户ID
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/user/edit/role",method=RequestMethod.POST)
+	public  String editRole(int [] roleId,int userid,Model model){
+		int i = userRoleService.updateroles(roleId,userid);
+		if(i==0){
+			return "redirect:/user/edit/role/"+userid+"?mesg=0";
+		}
+		else{
+			return "redirect:/user/edit/role/"+userid+"?mesg=1";
+		}
+	}
+	
 	/**
 	 * 用户信息修改模块
 	 * @param user 更新后的用户信息

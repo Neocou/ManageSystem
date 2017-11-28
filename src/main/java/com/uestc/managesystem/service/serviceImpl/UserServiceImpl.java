@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public List<User> getUsers() {
-		List<User> users = userMapper.findAllUser();
+		List<User> users = userMapper.findAllUserCommon();
 		
 		return users;
 	}
@@ -226,6 +226,16 @@ public class UserServiceImpl implements UserService {
 	public List<User> selectAllAdmin() {
 		// TODO Auto-generated method stub
 		List<User> users = userMapper.findAllUserAdmin();
+		return users;
+	}
+
+	/**
+	 * 查看所有已有角色ID用户
+	 */
+	@Override
+	public List<Integer> getUsers(Integer id) {
+		// TODO Auto-generated method stub
+		List<Integer> users = userMapper.findAllUserByRole(id);
 		return users;
 	}
 

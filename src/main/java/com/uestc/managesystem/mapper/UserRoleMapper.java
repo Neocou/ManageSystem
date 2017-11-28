@@ -12,4 +12,8 @@ public interface UserRoleMapper {
 	List<Integer> selectRoleId(Integer userNumber);
 
 	int insertAll(List<UserRole> userRoles);
+
+	void removeAll(int roleid);
+
+	void removeAllByUser(int userid);
 }

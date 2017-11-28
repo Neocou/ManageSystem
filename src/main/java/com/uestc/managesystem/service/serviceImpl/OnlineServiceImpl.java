@@ -40,7 +40,7 @@ public class OnlineServiceImpl implements OnlineService {
 	@Override
 	public List<User> findAllByStatus() {
 		// TODO Auto-generated method stub
-		List<User> users = userMapper.findAllByStatus();
+		List<User> users = userMapper.findAllUser();
 		return users;
 	}
 

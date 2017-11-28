@@ -23,10 +23,40 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Override
 	public int updateusers(int[] userids, int roleid) {
 		// TODO Auto-generated method stub
+		userRoleMapper.removeAll(roleid);
 		List<UserRole> userRoles = new ArrayList<>();
 		for(int userid :userids){
 			UserRole userRole = new UserRole();
 			userRole.setRoleId(roleid);
+			userRole.setUserNumber(userid);
+			userRoles.add(userRole);
+		}
+		int i = userRoleMapper.insertAll(userRoles);
+		return i;
+	}
+
+	/**
+	 * 根据用户ID查看角色
+	 */
+	@Override
+	public List<Integer> selectRoles(int id) {
+		// TODO Auto-generated method stub
+		List<Integer> roles = userRoleMapper.selectRoleId(id);
+		return roles;
+	}
+
+	/**
+	 * 用户批量分配角色
+	 */
+	@Transactional
+	@Override
+	public int updateroles(int[] roleIds, int userid) {
+		// TODO Auto-generated method stub
+		userRoleMapper.removeAllByUser(userid);
+		List<UserRole> userRoles = new ArrayList<>();
+		for(int roleId :roleIds){
+			UserRole userRole = new UserRole();
+			userRole.setRoleId(roleId);
 			userRole.setUserNumber(userid);
 			userRoles.add(userRole);
 		}

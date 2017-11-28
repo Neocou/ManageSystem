@@ -1,11 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" import="com.uestc.managesystem.entity.model.User" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>角色用户分配</title>
 <%@ include file="/WEB-INF/views/common/js.jsp"%> 
+<script type="text/javascript">
+$(function(){  
+      var users = ${roleusers};
+      $.each(users, function(i,item){  
+            $("input[name=userids][value="+item+"]").attr("checked","checked");
+      });  
+    });  
+</script>
 </head>
 <body>
 <div class="container">

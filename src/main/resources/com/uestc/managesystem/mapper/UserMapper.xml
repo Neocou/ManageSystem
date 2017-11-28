@@ -94,10 +94,11 @@
     from user
   </select>
   
-  <select id="findAllByStatus"  resultMap="BaseResultMap">
+  <select id="findAllUserByRole" parameterType = "Integer" resultType="Integer">
     select 
-   	user_Number,user_Name,user_status
-    from user
+   	user_Number
+    from user_role  
+    where role_ID = #{role_ID,jdbcType=INTEGER}
   </select>
   <select id="findByStatus"  parameterType = "String" resultMap="BaseResultMap">
     select 

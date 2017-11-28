@@ -51,4 +51,6 @@ public interface UserMapper {
 
 	List<User> findAllUserAdmin();
 
+	List<Integer> findAllUserByRole(Integer id);
+
 }

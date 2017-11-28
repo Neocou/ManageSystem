@@ -25,4 +25,5 @@ public interface UserService {
 	List<User> userSelectCommon(UserSelect userSelect);
 	List<User> selectAllCommon();
 	List<User> selectAllAdmin();
+	List<Integer> getUsers(Integer id);
 }

@@ -15,6 +15,7 @@
 			<script >alert("更新失败")</script>
 		</c:when>
 	</c:choose>
+
 </head>
 <body>
 <div class="container">
@@ -31,7 +32,7 @@
 							</div>
 		
 						<div >
-		                    <div class="col-md-12 table-area ">
+		                    <div class="col-md-12 table-area">
 							
 		                        <form action="/ManageSystem/user/edit" method="post">
 		                            <table id="DepartmentTable" class="table table-responsive table-bordered table-hover table-condensed">
@@ -61,16 +62,19 @@
 											</td>
 		                                <tr>
 		                                    <td >年龄</td>
-		                                    <td><input type = "text" name = "age"   class = "form-control"  value = ${ result.age } /></td>
+		                                    <td><input type = "number" name = "age"   class = "form-control"  value = ${ result.age } /></td>
 		                                    <td >电话</td>
 		                                    <td><input type = "text" name = "phoneNum"  class = "form-control"   value = ${ result.phoneNum } /></td>
 		                                </tr>
 		                            </table>
-		                            <input type = "hidden" name ="userNumber"  value = ${ result.userNumber } />
+		                            <input type = "hidden" name ="userNumber" id = "userNumber" value = ${ result.userNumber } />
+		                            <div class="col-md-3">
 									<input type="submit" name="edit"  onclick="if(confirm('确认更新用户吗')){return true;}else return false;" class="btn btn-success" value = "更新" />
 									<Button  type="button" name="back" onclick =  "window.location.href='http://localhost:8080/ManageSystem/user/select'" class="btn btn-info">返回</Button>
+									</div>
+									<div class="col-md-2 col-md-offset-7"><Button  type="button" id="rolesearch" onclick =  "window.location.href='http://localhost:8080/ManageSystem/user/edit/role/${ result.userNumber }'" class="btn btn-info">角色编辑</Button></div>
 							</form>
-		                    </div>
+		                    </div>   
 					</div>
 		            </div>   
 		            </div>

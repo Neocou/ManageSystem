@@ -93,7 +93,9 @@ public class RoleController {
 			return "roleManage/rolepower" ;
 		case "用户分配":
 			List<User> users = userService.getUsers();
+			List<Integer> roleusers = userService.getUsers(id);
 			model.addAttribute("users", users);
+			model.addAttribute("roleusers", roleusers);
 			model.addAttribute("roleid", id);
 			return "roleManage/roleuser";
 		default:
