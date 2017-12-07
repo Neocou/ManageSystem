@@ -100,10 +100,15 @@
     from user_role  
     where role_ID = #{role_ID,jdbcType=INTEGER}
   </select>
-  <select id="findByStatus"  parameterType = "String" resultMap="BaseResultMap">
+  <select id="findOnline"  resultMap="BaseResultMap">
     select 
     user_Number,user_Name,user_status
-    from user where user_status = #{user_status}
+    from user where user_status != '离线'
+  </select>
+  <select id="findOffline"  resultMap="BaseResultMap">
+    select 
+    user_Number,user_Name,user_status
+    from user where user_status = '离线'
   </select>
   <select id="findAllUserCommon"  resultMap="BaseResultMap">
     select 
@@ -263,6 +268,11 @@
   <update id="setOnline" parameterType="com.uestc.managesystem.entity.model.User">
     update user
 	set user_status = '在线'
+	where user_Number = #{userNumber,jdbcType=INTEGER} 
+  </update>
+  <update id="setStatus" parameterType="com.uestc.managesystem.entity.model.User">
+    update user
+	set user_status = #{userStatus,jdbcType=VARCHAR}
 	where user_Number = #{userNumber,jdbcType=INTEGER} 
   </update>
   <update id="setOffline" parameterType="com.uestc.managesystem.entity.model.User">

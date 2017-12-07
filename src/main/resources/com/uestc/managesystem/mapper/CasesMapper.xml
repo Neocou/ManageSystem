@@ -13,7 +13,7 @@
   <sql id="Base_Column_List">
     case_ID, event_L_ID, part_L_ID, grid_ID, stage, time_Limit, case_Describe
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from cases
@@ -30,7 +30,7 @@
     <include refid="Base_Column_List" />
     from cases order by stage
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="Integer">
     delete from cases
     where case_ID = #{caseId,jdbcType=INTEGER}
   </delete>

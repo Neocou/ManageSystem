@@ -37,7 +37,7 @@ public interface UserMapper {
 
 
 
-	List<User> findByStatus(String status);
+
 
 	void setOnline(User userInfo);
 
@@ -52,5 +52,11 @@ public interface UserMapper {
 	List<User> findAllUserAdmin();
 
 	List<Integer> findAllUserByRole(Integer id);
+
+	void setStatus(User userinfo);
+
+	List<User> findOffline();
+
+	List<User> findOnline();
 
 }

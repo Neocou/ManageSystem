@@ -35,7 +35,7 @@ public class RoleController {
 	 * @return
 	 */
 	@RequestMapping(value="/role",method=RequestMethod.GET)
-	public String postManage(Model model){
+	public String roleManage(Model model){
 		List<Role> roles = roleService.findAll();
 		model.addAttribute("roles", roles);
 		return "roleManage/rolemanage";

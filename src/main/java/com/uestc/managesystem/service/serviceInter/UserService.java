@@ -26,4 +26,5 @@ public interface UserService {
 	List<User> selectAllCommon();
 	List<User> selectAllAdmin();
 	List<Integer> getUsers(Integer id);
+	void setStatus(User userinfo);
 }

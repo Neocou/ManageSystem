@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uestc.managesystem.entity.model.User;
 import com.uestc.managesystem.mapper.UserMapper;
+import com.uestc.managesystem.service.serviceInter.UserService;
 
 public class MySessionListener implements HttpSessionListener {
 
+
 	@Autowired
-	private UserMapper userMapper;
+	private UserService userService;
 	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 		// TODO Auto-generated method stub
@@ -25,7 +27,7 @@ public class MySessionListener implements HttpSessionListener {
 		HttpSession session = se.getSession();
 		User userInfo = (User)session.getAttribute("userinfo");
 		if(userInfo != null){
-			userMapper.setOffline(userInfo);
+			userService.setOffline(userInfo);
 		}
 
 	}

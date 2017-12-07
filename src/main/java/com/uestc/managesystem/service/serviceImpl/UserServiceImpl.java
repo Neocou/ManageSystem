@@ -182,6 +182,7 @@ public class UserServiceImpl implements UserService {
 			userMapper.setOnline(userResult);
 		} catch (Exception e) {
 			// TODO: handle exception
+			throw new RuntimeException("设置用户在线失败,请查看数据是否正确");
 		}
 		
 	}
@@ -195,7 +196,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			userMapper.setOffline(userResult);
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new RuntimeException("设置用户离线失败,请查看数据是否正确");
 		}
 	}
 
@@ -237,6 +238,16 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		List<Integer> users = userMapper.findAllUserByRole(id);
 		return users;
+	}
+
+	@Override
+	public void setStatus(User userinfo) {
+		// TODO Auto-generated method stub
+		try {
+			userMapper.setStatus(userinfo);
+		} catch (Exception e) {
+			throw new RuntimeException("设置用户操作状态失败,请查看数据是否正确");
+		}
 	}
 
 

@@ -25,15 +25,17 @@
 						<div >
 		                    <div class="col-md-12">
 		                        <div class="input-group col-md-12"> 
-		                        <form action="select" method="post">
-									 <input class="form-control" type="search" placeholder="输入用户编号" name="userNumber" id="queryId">
-									  <input class="form-control" type="search" placeholder="输入用户姓名" name="userName" id="queryId">
-									   <input class="form-control" type="search" placeholder="输入部门" name="departmentName" id="queryId">
-										<input class="form-control" type="search" placeholder="输入岗位" name="postName" id="queryId">
+		                        <!-- <form action="select" method="post"> -->
+									 <input class="form-control" type="search" placeholder="输入用户编号" name="userNumber" id=userNumber>
+									  <input class="form-control" type="search" placeholder="输入用户姓名" name="userName" id="userName">
+									   <input class="form-control" type="search" placeholder="输入部门" name="departmentName" id="departmentName">
+										<input class="form-control" type="search" placeholder="输入岗位" name="postName" id="postName">
+		                            <div>
 		                            <span class="input-group-btn">
-								        <Button  type="submit" name="serach" id="serachBtn" class="btn btn-info">搜索</Button>
+								        <Button  type="button" name="serach" id="testBtn" class="btn btn-info">搜索</Button>
 		                             </span>
-		                             </form>
+		                             </div>
+		                         <!--     </form> -->
 		                           
 		                        </div>
 		
@@ -50,16 +52,17 @@
 		                                </tr>
 		                            </thead>
 		                            <tbody>
-		                            <c:forEach items="${users}" var="a">
+	<%-- 	                            <c:forEach items="${users}" var="a">
 		                                <tr>
-		                                    <td><input type = "text" class = "form-control" name ="userNumber" readonly="readonly" value = ${ a.userNumber } /></td>
-		                                    <td><input type = "text" class = "form-control" name ="userName" readonly="readonly" value = ${ a.userName} /></td>
-		                                    <td><input type = "text" class = "form-control" name = "departmentName"  readonly="readonly" value = ${ a.departmentName } /></td>
-		                                    <td><input type = "text" class = "form-control" name ="postName" readonly="readonly" value = ${ a.postName } /></td>
+		                                    <td><input type = "text" class = "form-control"  readonly="readonly" value = ${ a.userNumber } /></td>
+		                                    <td><input type = "text" class = "form-control"  readonly="readonly" value = ${ a.userName} /></td>
+		                                    <td><input type = "text" class = "form-control"   readonly="readonly" value = ${ a.departmentName } /></td>
+		                                    <td><input type = "text" class = "form-control"  readonly="readonly" value = ${ a.postName } /></td>
 		                                    <td><Button type="submit"    class="btn btn-success" onclick="window.location.href='http://localhost:8080/ManageSystem/users/select/${ a.userNumber }'">详情</Button></td>
 		                                </tr>
 		                             </c:forEach>
-		                            </tbody>
+		                             --%>
+		                            </tbody> 
 		                            </table>
 		                    </div>
 					</div>
@@ -71,5 +74,42 @@
 	</div>
 
 </div>
+<script type="text/javascript">
+$('#testBtn').click(function () { 
+	 var userNumber=$("#userNumber").val();
+	 var userName=$("#userName").val();
+	 var departmentName=$("#departmentName").val();
+	 var postName=$("#postName").val();
+	  $.ajax({  
+           type: "post",  
+           dataType:"json",
+           data: {	 
+        	  "userNumber":userNumber,
+	      	  "userName":userName,
+	    	  "departmentName":departmentName,
+	    	  "postName":postName
+    	 },  
+           url: "select",  
+        
+            success: function (data) {  
+            	$('#DepartmentTable tbody').html("");
+            	var str = "";
+				$.each(data,function(index,item){
+					str ="<tr>"
+					+"<td>"+item.userNumber+"</td>"
+					+"<td>"+item.userName+"</td>"
+					+"<td>"+item.departmentName+"</td>"
+					+"<td>"+item.postName+"</td>"
+					+"<td><Button type='button'   class='btn btn-success' onclick=\"window.location.href='http://localhost:8080/ManageSystem/users/select/"+item.userNumber+"'\">详情</Button></td>"+
+					"</tr>";
+					$('#DepartmentTable tbody').append(str);
+				});
+           },   
+           error: function () {  
+               alert("查询失败")  
+           }  
+       });  
+ });  
+</script>
 </body>
 </html>

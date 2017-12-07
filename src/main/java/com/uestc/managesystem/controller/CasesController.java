@@ -36,7 +36,7 @@ public class CasesController {
 	 * @return
 	 */
 	@RequestMapping(value = "/cases/settime",method = RequestMethod.POST)
-	public String setTime(Cases cases,Model model){
+	public String setTimePost(Cases cases,Model model){
 		int i = casesService.setTime(cases);
 		if(i==0){
 			return "redirect:/cases/settime?mesg=0";

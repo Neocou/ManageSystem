@@ -40,7 +40,7 @@ public class OperationRecordController {
 	 * @return
 	 */
 	@RequestMapping(value="/operation/admin",method = RequestMethod.POST)
-	public String operationView(User user,Model model){
+	public String operationViewSelect(User user,Model model){
 		List<OperationRecord> records = operationService.findByUser(user);
 		model.addAttribute("records", records);
 		return "/operation/admin";

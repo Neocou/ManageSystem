@@ -1,11 +1,15 @@
 package com.uestc.managesystem.service.serviceImpl;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+
+import com.uestc.managesystem.entity.dto.UserSelect;
 import com.uestc.managesystem.entity.model.User;
 import com.uestc.managesystem.service.serviceInter.UserService;
 
@@ -19,10 +23,12 @@ public class UserServiceImplTest {
 
 	@Test
 	public void testlogin() {
-		User user = new User();
-		user.setUserNumber(1);
-		user.setPassWord("123456");
-		System.out.println(userService.login(user).getUserNumber());
+		UserSelect userSelect = new UserSelect();
+		userSelect.setDepartmentName("财务部");
+		List<User> users = userService.userSelectCommon(userSelect);
+		for(User user:users){
+			System.out.println(user);
+		}
 	}
 
 }

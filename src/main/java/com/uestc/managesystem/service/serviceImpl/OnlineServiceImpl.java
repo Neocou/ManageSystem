@@ -30,7 +30,13 @@ public class OnlineServiceImpl implements OnlineService {
 	@Override
 	public List<User> findByStatus(String status) {
 		// TODO Auto-generated method stub
-		List<User> users = userMapper.findByStatus(status);
+		List<User> users;
+		if(status.equals("离线")){
+			users = userMapper.findOffline();
+		}
+		else{
+			users = userMapper.findOnline();
+		}
 		return users;
 	}
 

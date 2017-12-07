@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uestc.managesystem.entity.dto.UserSelect;
 import com.uestc.managesystem.entity.model.User;
@@ -145,14 +146,9 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="/users/select",method=RequestMethod.POST)
-	public String select(UserSelect userSelect,Model model){
+	public @ResponseBody List<User> select(UserSelect userSelect,Model model){
 		List<User> users = userService.userSelectCommon(userSelect);
-		if(users==null){
-			return "redirect:userManage/commonSelect?mesg=0";
-		}
-		
-		model.addAttribute("users", users);
-		return "userManage/commonSelect";
+		return users;
 	}
 	
 	/**
