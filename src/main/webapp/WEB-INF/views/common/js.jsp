@@ -11,4 +11,20 @@
     <script src="http://localhost:8080/ManageSystem/assets/css/bootstrap/js/bootstrap-datepicker.js" ></script>
      <script src="http://localhost:8080/ManageSystem/assets/css/bootstrap/js/time.js" ></script>
     <script src="http://localhost:8080/ManageSystem/assets/css/bootstrap/js/bootstrap-datepicker.zh-CN.min.js" ></script>
+<script>
+    $(document).ready(function(){
+        $(document).off('click.bs.dropdown.data-api');
+        dropdownOpen();
+    });
 
+    function dropdownOpen() {
+
+        var $dropdownLi = $('li.dropdown');
+
+        $dropdownLi.mouseover(function() {
+            $(this).addClass('open');
+        }).mouseout(function() {
+            $(this).removeClass('open');
+        });
+    }
+</script>
