@@ -29,7 +29,7 @@ public class RestTimeServiceImpl implements RestTimeService {
 			return "今天是休息日";
 		}
 		RestTime restTime = restTimeMapper.findNext();
-		if(today.after(restTime.getStartTime())){
+		if(restTime!=null&&today.after(restTime.getStartTime())){
 			return "今天是休息日";
 		}
 		return "今天是工作日";
