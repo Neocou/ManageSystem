@@ -23,6 +23,9 @@ public class RestTimeController {
 	@Autowired
 	private RestTimeService restTimeService;
 	
+	@Autowired
+	private ServletContext servletContext;
+	
 	/**
 	 * 休息日查看模块
 	 * @param model
@@ -104,9 +107,7 @@ public class RestTimeController {
 	 */
 	@Scheduled(cron="0 0 0 * * ?" )
 	public void judge(){
-		WebApplicationContext webApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-		ServletContext application = webApplicationContext.getServletContext();//获取ServletContext
 		String  restMesg =  restTimeService.judge();
-		application.setAttribute("restMesg", restMesg);
+		servletContext.setAttribute("restMesg", restMesg);
 	}
 }
