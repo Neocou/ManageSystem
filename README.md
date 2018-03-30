@@ -24,7 +24,7 @@ Spring事务管理直接配置在spring-context.xml,我写的service一般是单
 
 # 具体功能也不说明了，毕竟说这么多，下面看图吧。
 
-#注意jdbc和log4j都有数据库配置信息要改
+注意jdbc和log4j都有数据库配置信息要改
 
 ![1](https://github.com/Neocou/ManageSystem/blob/master/pic/1.PNG)
 ![2](https://github.com/Neocou/ManageSystem/blob/master/pic/2.PNG)
@@ -38,7 +38,7 @@ Spring事务管理直接配置在spring-context.xml,我写的service一般是单
 ![22](https://github.com/Neocou/ManageSystem/blob/master/pic/22.png)
 
 
-<h2>就这样吧啊，看着不顺眼再改，编辑文档真麻烦</h2>
-# -----------更新部分内容---------
+# 就这样吧啊，看着不顺眼再改，编辑文档真麻烦
+# 更新部分内容
 更改c3p0为druid数据池，感觉好用一点，还自带监控功能，这部分功能配置在web.xml。<br>
 加入swagger-ui,这是我在公司实习发现的前端和后端协同工作的一个很好用的东西，不过我的个人项目不是restful,所以效果不是很好，后面有时间把项目改成restful的。
