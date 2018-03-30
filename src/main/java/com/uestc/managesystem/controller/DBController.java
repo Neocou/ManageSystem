@@ -9,6 +9,8 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.uestc.managesystem.service.serviceInter.DBService;
 
 @Controller
+@Api(value = "数据库管理")
 public class DBController {
 	
 	@Autowired
@@ -28,6 +31,7 @@ public class DBController {
 	 * 默认跳转
 	 * @return
 	 */
+	@ApiOperation(value = "数据库管理入口",httpMethod = "GET")
 	@RequestMapping(value = "/dbmanage" ,method = RequestMethod.GET)
 	public String dbmanage(){
 		return "dbManage/dbmanage";
@@ -39,6 +43,7 @@ public class DBController {
 	 * @param response
 	 * @throws Exception
 	 */
+	@ApiOperation(value = "下载数据库文件",httpMethod = "GET")
 	@RequestMapping(value = "/download" ,method = RequestMethod.GET)
     public void downLoad(HttpServletRequest request,HttpServletResponse response) throws Exception{  
 		dbService.backup();
@@ -68,6 +73,7 @@ public class DBController {
 	 * @param model
 	 * @return
 	 */
+	@ApiOperation(value = "上传数据库文件",httpMethod = "POST")
 	@RequestMapping(value="/upload",method=RequestMethod.POST)
 	public String uploadExcel(HttpServletRequest request,  MultipartFile file,Model model) {
 		try {

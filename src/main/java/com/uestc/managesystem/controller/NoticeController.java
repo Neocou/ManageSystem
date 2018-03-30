@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import com.uestc.managesystem.entity.model.Notice;
 import com.uestc.managesystem.service.serviceInter.NoticeService;
 
 @Controller
+@Api(value = "公告管理")
+@RequestMapping(value = "/notice")
 public class NoticeController {
 
 	@Autowired
@@ -23,7 +27,8 @@ public class NoticeController {
 	 * @param model 传递公告信息
 	 * @return
 	 */
-	@RequestMapping(value="/notice",method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
+	@ApiOperation(value = "公告管理",httpMethod = "GET")
 	public String getNotice(Model model){
 		List<Notice> notices = noticeService.findAll();
 		model.addAttribute("notices", notices);
@@ -36,7 +41,8 @@ public class NoticeController {
 	 * @param model   传递编辑的公告信息
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/edit/{noticeid}",method = RequestMethod.GET)
+	@ApiOperation(value = "公告编辑",httpMethod = "GET")
+	@RequestMapping(value = "edit/{noticeid}",method = RequestMethod.GET)
 	public String edit(@PathVariable("noticeid")int noticeid,Model model){
 		Notice notice = noticeService.selectNotice(noticeid);
 		if(notice == null){
@@ -52,7 +58,8 @@ public class NoticeController {
 	 * @param notice 更新的公告信息
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/edit",method = RequestMethod.POST)
+	@ApiOperation(value = "公告编辑",httpMethod = "POST")
+	@RequestMapping(value = "edit",method = RequestMethod.POST)
 	public String edit(Notice notice){
 		System.out.println(notice.getNoticeContent());
 		int i = noticeService.update(notice);
@@ -67,7 +74,8 @@ public class NoticeController {
 	 * @param noticeid 删除公告id
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/del/{noticeid}",method = RequestMethod.GET)
+	@ApiOperation(value = "公告删除",httpMethod = "GET")
+	@RequestMapping(value = "del/{noticeid}",method = RequestMethod.GET)
 	public String del(@PathVariable("noticeid") int noticeid){
 		int i = noticeService.delete(noticeid);
 		if(i==0){
@@ -81,7 +89,8 @@ public class NoticeController {
 	 * 公告添加模块
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/add",method = RequestMethod.GET)
+	@ApiOperation(value = "公告添加",httpMethod = "GET")
+	@RequestMapping(value = "add",method = RequestMethod.GET)
 	public String add(){
 		return "notice/noticeadd";
 	}
@@ -92,7 +101,8 @@ public class NoticeController {
 	 * @param notice 添加的公告信息
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/add",method = RequestMethod.POST)
+	@ApiOperation(value = "公告添加",httpMethod = "POST")
+	@RequestMapping(value = "add",method = RequestMethod.POST)
 	public String add(Notice notice){
 		int i = noticeService.insert(notice);
 		if(i==0){
@@ -106,7 +116,8 @@ public class NoticeController {
 	 * @param model 传递公告信息
 	 * @return
 	 */
-	@RequestMapping(value="/notice/view",method=RequestMethod.GET)
+	@ApiOperation(value = "外部公告查看",httpMethod = "GET")
+	@RequestMapping(value="view",method=RequestMethod.GET)
 	public String viewNotice(Model model){
 		List<Notice> notices = noticeService.findAll();
 		model.addAttribute("notices", notices);
@@ -119,7 +130,8 @@ public class NoticeController {
 	 * @param model   传递编辑的公告信息
 	 * @return
 	 */
-	@RequestMapping(value = "/notice/view/{noticeid}",method = RequestMethod.GET)
+	@ApiOperation(value = "内部公告查看",httpMethod = "GET")
+	@RequestMapping(value = "view/{noticeid}",method = RequestMethod.GET)
 	public String viewDetail(@PathVariable("noticeid")int noticeid,Model model){
 		Notice notice = noticeService.selectNotice(noticeid);
 		if(notice == null){

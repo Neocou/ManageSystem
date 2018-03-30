@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import com.uestc.managesystem.entity.model.EventSecond;
 import com.uestc.managesystem.service.serviceInter.EventService;
 
 @Controller
+@RequestMapping(value = "/event")
+@Api(value = "事件管理")
 public class EventController {
 	@Autowired
 	private EventService eventService;
@@ -23,7 +27,8 @@ public class EventController {
 	 * @param model 传递全部事件
 	 * @return
 	 */
-	@RequestMapping(value = "/event", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
+	@ApiOperation(value = "事件管理入口",httpMethod = "GET")
 	public String get(Model model){
 		List<EventFirst> events = eventService.findAll();
 		model.addAttribute("events", events);
@@ -36,7 +41,8 @@ public class EventController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/event/{eventid}", method = RequestMethod.GET)
+	@ApiOperation(value = "事件编辑",httpMethod = "GET")
+	@RequestMapping(value = "{eventid}", method = RequestMethod.GET)
 	public String edit(@PathVariable("eventid")int eventid,Model model){
 		EventSecond event = eventService.selectById(eventid);
 		model.addAttribute("event", event);
@@ -48,7 +54,8 @@ public class EventController {
 	 * @param eventSecond 更新后的事件内容
 	 * @return
 	 */
-	@RequestMapping(value = "/event/edit", method = RequestMethod.POST)
+	@ApiOperation(value = "事件编辑",httpMethod = "POST")
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(EventSecond eventSecond){
 		int i = eventService.update(eventSecond);
 		if(i==0){
@@ -62,7 +69,8 @@ public class EventController {
 	 * 跳转到eventadd.jsp
 	 * @return
 	 */
-	@RequestMapping(value="/event/add",method=RequestMethod.GET)
+	@ApiOperation(value = "事件添加",httpMethod = "GET")
+	@RequestMapping(value="add",method=RequestMethod.GET)
 	public String add(){
 		return "eventManage/eventadd";
 	}
@@ -71,6 +79,7 @@ public class EventController {
 	 * @param eventSecond 添加事件的信息
 	 * @return
 	 */
+	@ApiOperation(value = "事件添加",httpMethod = "POST")
 	@RequestMapping(value="/event/add",method=RequestMethod.POST)
 	public String add(EventSecond eventSecond){
 		int i = eventService.insert(eventSecond);
@@ -87,7 +96,8 @@ public class EventController {
 	 * @param id 删除事件的ID
 	 * @return
 	 */
-	@RequestMapping(value="/event/del/{id}",method=RequestMethod.GET)
+	@ApiOperation(value = "事件删除",httpMethod = "GET")
+	@RequestMapping(value="del/{id}",method=RequestMethod.GET)
 	public String del(@PathVariable("id")int id){
 		int i = eventService.remove(id);
 		if(i==0){

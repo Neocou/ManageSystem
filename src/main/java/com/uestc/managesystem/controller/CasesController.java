@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import com.uestc.managesystem.entity.model.Cases;
 import com.uestc.managesystem.service.serviceInter.CasesService;
 
 @Controller
+@Api(value = "案件管理")
+@RequestMapping(value = "/cases")
 public class CasesController {
 	@Autowired
 	private CasesService casesService;
@@ -21,7 +25,8 @@ public class CasesController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/cases/settime",method = RequestMethod.GET)
+	@ApiOperation(value = "设定时限",httpMethod = "GET")
+	@RequestMapping(value = "settime",method = RequestMethod.GET)
 	public String setTime(Model model){
 		List<Cases>  cases = casesService.findAllNo();
 		model.addAttribute("cases", cases);
@@ -35,7 +40,8 @@ public class CasesController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/cases/settime",method = RequestMethod.POST)
+	@ApiOperation(value = "设定时限",httpMethod = "POST")
+	@RequestMapping(value = "settime",method = RequestMethod.POST)
 	public String setTimePost(Cases cases,Model model){
 		int i = casesService.setTime(cases);
 		if(i==0){
@@ -49,7 +55,8 @@ public class CasesController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/cases/view",method = RequestMethod.GET)
+	@ApiOperation(value = "查看案件",httpMethod = "GET")
+	@RequestMapping(value = "view",method = RequestMethod.GET)
 	public String view(Model model){
 		List<Cases>  cases = casesService.findAll();
 		model.addAttribute("cases", cases);

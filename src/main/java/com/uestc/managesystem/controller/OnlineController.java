@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import com.uestc.managesystem.entity.model.User;
 import com.uestc.managesystem.service.serviceInter.OnlineService;
 
 @Controller
+@Api(value = "在线查看")
+@RequestMapping(value = "/online")
 public class OnlineController {
 
 	@Autowired
@@ -24,7 +28,8 @@ public class OnlineController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/online",method = RequestMethod.GET)
+	@ApiOperation(value = "在线查看入口",httpMethod = "GET")
+	@RequestMapping(method = RequestMethod.GET)
 	public String getAll(Model model){
 		List<User> users = onlineService.findAllByStatus();
 		model.addAttribute("users", users);
@@ -37,6 +42,7 @@ public class OnlineController {
 	 * @param model
 	 * @return
 	 */
+	@ApiOperation(value = "在线查询",httpMethod = "POST")
 	@RequestMapping(value = "/online/select",method = RequestMethod.POST)
 	public String select(String status,Model model){
 		List<User> users = onlineService.findByStatus(status);

@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ import com.uestc.managesystem.entity.model.PartsSecond;
 import com.uestc.managesystem.service.serviceInter.PartService;
 
 @Controller
+@RequestMapping("/parts")
+@Api(value = "部件管理")
 public class PartController {
 	
 	@Autowired
@@ -23,7 +27,8 @@ public class PartController {
 	 * @param model 传递全部部件
 	 * @return
 	 */
-	@RequestMapping(value = "/parts", method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.GET)
+	@ApiOperation(value = "部件管理入口",httpMethod = "GET")
 	public String get(Model model){
 		List<PartsFirst> parts = partService.findAll();
 		model.addAttribute("parts", parts);
@@ -36,7 +41,8 @@ public class PartController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/parts/{partid}", method = RequestMethod.GET)
+	@ApiOperation(value = "部件编辑",httpMethod = "GET")
+	@RequestMapping(value = "{partid}", method = RequestMethod.GET)
 	public String edit(@PathVariable("partid")int partid,Model model){
 		PartsSecond part = partService.selectById(partid);
 		model.addAttribute("part", part);
@@ -48,7 +54,8 @@ public class PartController {
 	 * @param eventSecond 更新后的部件内容
 	 * @return
 	 */
-	@RequestMapping(value = "/parts/edit", method = RequestMethod.POST)
+	@ApiOperation(value = "部件编辑",httpMethod = "POST")
+	@RequestMapping(value = "edit", method = RequestMethod.POST)
 	public String edit(PartsSecond partsSecond){
 		int i = partService.update(partsSecond);
 		if(i==0){
@@ -61,16 +68,19 @@ public class PartController {
 	 * 跳转到partsadd.jsp
 	 * @return
 	 */
-	@RequestMapping(value="/parts/add",method=RequestMethod.GET)
+	@ApiOperation(value = "部件添加",httpMethod = "GET")
+	@RequestMapping(value="add",method=RequestMethod.GET)
 	public String add(){
 		return "partsManage/partsadd";
 	}
+
 	/**
 	 * 部件添加模块
 	 * @param partsSecond 添加部件的信息
 	 * @return
 	 */
-	@RequestMapping(value="/parts/add",method=RequestMethod.POST)
+	@ApiOperation(value = "部件添加",httpMethod = "POST")
+	@RequestMapping(value="add",method=RequestMethod.POST)
 	public String add(PartsSecond partsSecond){
 		int i = partService.insert(partsSecond);
 		if(i==0){
@@ -86,7 +96,8 @@ public class PartController {
 	 * @param id 删除部件的ID
 	 * @return
 	 */
-	@RequestMapping(value="/parts/del/{id}",method=RequestMethod.GET)
+	@ApiOperation(value = "部件删除",httpMethod = "GET")
+	@RequestMapping(value="del/{id}",method=RequestMethod.GET)
 	public String del(@PathVariable("id")int id){
 		int i = partService.remove(id);
 		if(i==0){

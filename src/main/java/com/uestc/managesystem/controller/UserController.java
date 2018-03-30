@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.uestc.managesystem.entity.dto.UserSelect;
 import com.uestc.managesystem.entity.model.User;
 import com.uestc.managesystem.service.serviceInter.UserService;
-
 @Controller
 public class UserController {
 

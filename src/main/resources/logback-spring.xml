@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<!-- define attribute -->
+	<springProperty scope="context" name="logLevel" source="logging.level" defaultValue="DEBUG"/>
+	<springProperty scope="context" name="logDir" source="logging.path" defaultValue="/tmp/logs/"/>
+	<springProperty scope="context" name="logName" source="logging.name" defaultValue="ucenter"/>
+
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date{ISO8601} [%thread] %-5level %logger{36} - %msg %n
+			</Pattern>
+		</layout>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>TRACE</level>
+		</filter>
+	</appender>
+
+  	<appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logDir}/${logName}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		    <!-- daily rollover -->
+			<FileNamePattern>${logDir}/${logName}/${logName}.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
+  	</appender>
+
+	<appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logDir}/${logName}_error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<FileNamePattern>${logDir}/${logName}/${logName}_error.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter"><!-- 只打印错误日志 -->
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+  	<appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logDir}/${logName}_debug.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logDir}/${logName}/${logName}_debug.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder> 	    
+  	</appender>  	
+  		
+	<logger name="com.uestc.managesystem" additivity="false">
+		<level value="${logLevel}" />
+		<appender-ref ref="infoAppender"/>
+		<appender-ref ref="errorAppender"/>
+		<appender-ref ref="debugAppender"/>
+		<appender-ref ref="consoleAppender" />
+	</logger>
+
+	<root>
+		<level value="${logLevel}" />
+		<appender-ref ref="consoleAppender" />
+	</root>
+</configuration> 

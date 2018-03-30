@@ -2,6 +2,8 @@ package com.uestc.managesystem.controller;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import com.uestc.managesystem.entity.model.Post;
 import com.uestc.managesystem.service.serviceInter.PostService;
 
 @Controller
+@Api(value = "岗位管理")
+@RequestMapping(value = "/post")
 public class PostController {
 	@Autowired
 	private PostService postService;
@@ -23,8 +27,8 @@ public class PostController {
 	 * 默认显示全部
 	 * @return
 	 */
-	@RequestMapping(value="/post",method=RequestMethod.GET)
-	
+	@RequestMapping(method=RequestMethod.GET)
+	@ApiOperation(value = "岗位管理入口",httpMethod = "GET")
 	public String postManage(Model model){
 		List<Post> posts = postService.findAll();
 		model.addAttribute("posts", posts);

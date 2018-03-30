@@ -1,7 +1,14 @@
-.git
-.settings
-target
-.project
-.classpath
-*.class
-*.jar
+# Add any directories, files, or patterns you don't want to be tracked by version control
+# gradle
+.gradle/
+
+# idea
+out/
+target/
+.idea/
+pic/
+build/
+classes/
+# log
+
+*.log

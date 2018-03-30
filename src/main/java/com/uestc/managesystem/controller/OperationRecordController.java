@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import com.uestc.managesystem.entity.model.User;
 import com.uestc.managesystem.service.serviceInter.OperationService;
 
 @Controller
+@Api(value = "操作记录管理")
+@RequestMapping(value = "/operation")
 public class OperationRecordController {
 	
 	@Autowired
@@ -25,7 +29,8 @@ public class OperationRecordController {
 	 * @param model 
 	 * @return
 	 */
-	@RequestMapping(value="/operation/admin",method = RequestMethod.GET)
+	@RequestMapping(value="admin",method = RequestMethod.GET)
+	@ApiOperation(value = "管理员查看操作记录入口",httpMethod = "GET")
 	public String operationView(Model model){
 		List<OperationRecord> records = operationService.findAll();
 		model.addAttribute("records", records);
@@ -39,7 +44,8 @@ public class OperationRecordController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="/operation/admin",method = RequestMethod.POST)
+	@ApiOperation(value = "管理员查看操作记录查询",httpMethod = "POST")
+	@RequestMapping(value="admin",method = RequestMethod.POST)
 	public String operationViewSelect(User user,Model model){
 		List<OperationRecord> records = operationService.findByUser(user);
 		model.addAttribute("records", records);
@@ -52,7 +58,8 @@ public class OperationRecordController {
 	 * @param model 
 	 * @return
 	 */
-	@RequestMapping(value="/operation/user",method = RequestMethod.GET)
+	@ApiOperation(value = "个人查看操作记录查询",httpMethod = "GET")
+	@RequestMapping(value="user",method = RequestMethod.GET)
 	public String operationView(HttpSession session,Model model){
 		User userInfo = (User) session.getAttribute("userinfo");
 		List<OperationRecord> records = operationService.findById(userInfo.getUserNumber());
