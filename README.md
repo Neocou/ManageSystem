@@ -33,9 +33,9 @@ Spring事务管理直接配置在spring-context.xml,我写的service一般是单
 ![17](https://github.com/Neocou/ManageSystem/blob/master/pic/17.PNG)
 ![18](https://github.com/Neocou/ManageSystem/blob/master/pic/18.PNG)
 ![19](https://github.com/Neocou/ManageSystem/blob/master/pic/19.PNG)
-![20](https://github.com/Neocou/ManageSystem/blob/master/pic/20.PNG)
-![21](https://github.com/Neocou/ManageSystem/blob/master/pic/21.PNG)
-![22](https://github.com/Neocou/ManageSystem/blob/master/pic/22.PNG)
+![20](https://github.com/Neocou/ManageSystem/blob/master/pic/20.png)
+![21](https://github.com/Neocou/ManageSystem/blob/master/pic/21.png)
+![22](https://github.com/Neocou/ManageSystem/blob/master/pic/22.png)
 
 
 <h2>就这样吧啊，看着不顺眼再改，编辑文档真麻烦</h2>
