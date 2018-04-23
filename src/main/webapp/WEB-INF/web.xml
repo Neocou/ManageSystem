@@ -43,6 +43,10 @@
             <param-name>exclusions</param-name> <!-- 经常需要排除一些不必要的url -->
             <param-value>*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*</param-value>
         </init-param>
+	<init-param>
+		<param-name>sessionStatEnable</param-name>
+		<param-value>false</param-value>
+	</init-param>
     </filter>
     <filter-mapping>
         <filter-name>DruidWebStatFilter</filter-name>
