@@ -26,15 +26,15 @@ Spring事务管理直接配置在spring-context.xml,我写的service一般是单
 
 注意jdbc和log4j都有数据库配置信息要改
 
-![1](https://github.com/Neocou/ManageSystem/blob/master/pic/1.PNG)
-![2](https://github.com/Neocou/ManageSystem/blob/master/pic/2.PNG)
-![3](https://github.com/Neocou/ManageSystem/blob/master/pic/3.PNG)
-![11](https://github.com/Neocou/ManageSystem/blob/master/pic/11.PNG)
-![17](https://github.com/Neocou/ManageSystem/blob/master/pic/17.PNG)
-![18](https://github.com/Neocou/ManageSystem/blob/master/pic/18.PNG)
-![20](https://github.com/Neocou/ManageSystem/blob/master/pic/20.png)
-![21](https://github.com/Neocou/ManageSystem/blob/master/pic/21.png)
-![22](https://github.com/Neocou/ManageSystem/blob/master/pic/22.png)
+![1](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/1.PNG)
+![2](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/2.PNG)
+![3](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/3.PNG)
+![11](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/11.PNG)
+![17](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/17.PNG)
+![18](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/18.PNG)
+![20](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/20.png)
+![21](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/21.png)
+![22](https://raw.githubusercontent.com/Neocou/ManageSystem/master/pic/22.png)
 
 
 # 就这样吧啊，看着不顺眼再改，编辑文档真麻烦
